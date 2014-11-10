@@ -20,7 +20,7 @@ public interface RawMessage {
 
     boolean getInsertion();
 
-    ClickEventHandler getClickEventHandler();
+    ClickAction getClickEventHandler();
 
     HoverEventHandler getHoverEventHandler();
 

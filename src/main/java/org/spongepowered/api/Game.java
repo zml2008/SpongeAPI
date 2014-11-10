@@ -30,7 +30,7 @@ import org.spongepowered.api.entity.Player;
 import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.plugin.PluginManager;
 import org.spongepowered.api.service.scheduler.Scheduler;
-import org.spongepowered.api.title.Title;
+import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.world.World;
 
 import java.util.Collection;

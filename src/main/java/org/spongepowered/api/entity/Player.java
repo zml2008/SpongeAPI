@@ -25,7 +25,7 @@
 
 package org.spongepowered.api.entity;
 
-import org.spongepowered.api.title.Title;
+import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.util.command.CommandSource;
 
 public interface Player extends HumanEntity, CommandSource {

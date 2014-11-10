@@ -18,5 +18,7 @@ public class TextColors {
     public static final TextColor LIGHT_PURPLE = null;
     public static final TextColor YELLOW = null;
     public static final TextColor WHITE = null;
+
+    public static final TextColor RESET = null;
     
 }

@@ -16,6 +16,6 @@ public interface TextColor {
      *
      * @return the Minecraft color code
      */
-    @Deprecated Optional<Integer> getCode();
+    @Deprecated Optional<Character> getCode();
 
 }

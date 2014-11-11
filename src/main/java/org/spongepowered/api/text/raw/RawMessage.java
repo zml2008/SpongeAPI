@@ -1,15 +1,17 @@
 package org.spongepowered.api.text.raw;
 
-import org.spongepowered.api.text.raw.action.ClickAction;
-import org.spongepowered.api.text.raw.action.HoverAction;
+import org.spongepowered.api.text.action.ClickAction;
+import org.spongepowered.api.text.action.HoverAction;
+
+import java.util.List;
 
 public interface RawMessage {
 
     String getText();
 
-    Iterable<RawMessage> getExtra();
+    List<RawMessage> getExtra();
 
-    FormatCode getColor();
+    TextFormat getColor();
 
     boolean getBold();
 

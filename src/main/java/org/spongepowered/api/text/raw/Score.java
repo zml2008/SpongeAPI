@@ -1,9 +1,14 @@
 package org.spongepowered.api.text.raw;
 
+import com.google.common.base.Optional;
+
 public interface Score {
 
     String getPlayerName();
 
-    String getValue();
+    // TODO use Objective
+    Object getObjective();
+
+    Optional<String> getValue();
 
 }

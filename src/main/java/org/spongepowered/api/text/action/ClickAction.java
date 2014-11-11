@@ -1,4 +1,4 @@
-package org.spongepowered.api.text.raw.action;
+package org.spongepowered.api.text.action;
 
 public interface ClickAction<V> extends TextAction<V> {
 

@@ -1,7 +1,7 @@
 package org.spongepowered.api.text.raw;
 
-public enum FormatCode {
-
+public enum TextFormat {
+    /*
     BLACK,
     DARK_BLUE,
     DARK_GREEN,
@@ -17,7 +17,7 @@ public enum FormatCode {
     RED,
     LIGHT_PURPLE,
     YELLOW,
-    WHITE,
+    WHITE,*/
 
     OBFUSCATED,
     BOLD,

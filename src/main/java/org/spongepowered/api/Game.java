@@ -30,6 +30,7 @@ import org.spongepowered.api.entity.Player;
 import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.plugin.PluginManager;
 import org.spongepowered.api.service.scheduler.Scheduler;
+import org.spongepowered.api.text.raw.RawMessage;
 import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.world.World;
 
@@ -141,7 +142,7 @@ public interface Game {
      *
      * @param message The message to send
      */
-    void broadcastMessage(String message);
+    void broadcastMessage(RawMessage message);
 
     /**
      * Creates a new clean {@link Title} configuration that will reset the

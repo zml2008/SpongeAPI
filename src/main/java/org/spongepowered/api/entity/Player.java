@@ -25,6 +25,7 @@
 
 package org.spongepowered.api.entity;
 
+import org.spongepowered.api.text.raw.RawMessage;
 import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.util.command.CommandSource;
 
@@ -43,6 +44,13 @@ public interface Player extends HumanEntity, CommandSource {
      * @return The player's display name
      */
     String getDisplayName();
+
+    /**
+     * Sends the given message to this player
+     *
+     * @param message The message to send
+     */
+    void sendMessage(RawMessage message);
 
     /**
      * Sends a {@link Title} to this player. This is the same as calling

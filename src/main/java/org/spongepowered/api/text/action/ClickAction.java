@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.chat.action;
+package org.spongepowered.api.text.action;
 
 public interface ClickAction<V> extends TextAction<V> {
 

@@ -22,11 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.chat;
+package org.spongepowered.api.text;
 
-import org.spongepowered.api.chat.action.ClickAction;
-import org.spongepowered.api.chat.action.HoverAction;
-import org.spongepowered.api.chat.style.TextStyle;
+import org.spongepowered.api.text.action.ClickAction;
+import org.spongepowered.api.text.action.HoverAction;
+import org.spongepowered.api.text.style.TextStyle;
 
 public interface RawMessageBuilder {
 

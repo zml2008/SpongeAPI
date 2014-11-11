@@ -25,8 +25,8 @@
 
 package org.spongepowered.api.entity;
 
-import org.spongepowered.api.chat.RawMessage;
-import org.spongepowered.api.chat.title.Title;
+import org.spongepowered.api.text.RawMessage;
+import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.util.command.CommandSource;
 
 public interface Player extends HumanEntity, CommandSource {

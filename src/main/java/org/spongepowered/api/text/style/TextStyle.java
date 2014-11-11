@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.chat.style;
+package org.spongepowered.api.text.style;
 
 import com.google.common.base.Optional;
 

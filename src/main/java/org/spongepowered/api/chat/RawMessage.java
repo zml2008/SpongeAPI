@@ -22,17 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.raw;
+package org.spongepowered.api.chat;
 
-import com.google.common.base.Optional;
+import org.spongepowered.api.chat.action.ClickAction;
+import org.spongepowered.api.chat.action.HoverAction;
 
-public interface Score {
+import java.util.List;
 
-    String getPlayerName();
+public interface RawMessage extends StyledMessage {
 
-    // TODO use Objective
-    Object getObjective();
+    String getText();
 
-    Optional<String> getValue();
+    List<RawMessage> getExtra();
+
+    String getInsertion();
+
+    ClickAction getClickAction();
+
+    HoverAction getHoverAction();
+
+    String getTranslationIdentifier();
+
+    // todo use score
+    Object getScore();
 
 }

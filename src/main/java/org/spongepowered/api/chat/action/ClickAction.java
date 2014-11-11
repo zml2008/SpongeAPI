@@ -22,32 +22,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.raw;
+package org.spongepowered.api.chat.action;
 
-import org.spongepowered.api.text.TextFormat;
-import org.spongepowered.api.text.action.ClickAction;
-import org.spongepowered.api.text.action.HoverAction;
+public interface ClickAction<V> extends TextAction<V> {
 
-import java.util.List;
+    interface OpenUrl extends ClickAction<String> {
 
-public interface RawMessage {
+    }
 
-    String getText();
+    interface RunCommand extends ClickAction<String> {
 
-    List<RawMessage> getExtra();
+    }
 
-    TextFormat getColor();
+    interface ChangePage extends ClickAction<Integer> {
 
-    TextFormat getFormat();
+    }
 
-    String getInsertion();
+    interface SuggestCommand extends ClickAction<String> {
 
-    ClickAction getClickAction();
-
-    HoverAction getHoverAction();
-
-    String getTranslationIdentifier();
-
-    Score getScore();
+    }
 
 }

@@ -22,24 +22,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.action;
+package org.spongepowered.api.chat;
 
-public interface ClickAction<V> extends TextAction<V> {
+import org.spongepowered.api.chat.action.ClickAction;
+import org.spongepowered.api.chat.action.HoverAction;
+import org.spongepowered.api.chat.style.TextStyle;
 
-    interface OpenUrl extends ClickAction<String> {
+public interface RawMessageBuilder {
 
-    }
+    RawMessage build();
 
-    interface RunCommand extends ClickAction<String> {
+    RawMessageBuilder setText(String text);
 
-    }
+    RawMessageBuilder addExtra(RawMessage extra);
 
-    interface ChangePage extends ClickAction<Integer> {
+    RawMessageBuilder addExtra(Iterable<RawMessage> extra);
 
-    }
+    RawMessageBuilder addExtra(RawMessage... extra);
 
-    interface SuggestCommand extends ClickAction<String> {
+    RawMessageBuilder setFormat(TextStyle format);
 
-    }
+    RawMessageBuilder setInsertion(String insertion);
+
+    <V> RawMessageBuilder setClickAction(ClickAction<V> clickAction);
+
+    <V> RawMessageBuilder setHoverAction(HoverAction<V> hoverAction);
+
+    RawMessageBuilder setTranslationIdentifier(String translationIdentifier);
+
+    // TODO score api
+    RawMessageBuilder setScore(Object score);
+
+    RawMessageBuilder overrideScore(Object score, String value);
 
 }

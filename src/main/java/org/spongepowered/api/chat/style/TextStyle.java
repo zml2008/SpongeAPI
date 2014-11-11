@@ -22,34 +22,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.raw;
+package org.spongepowered.api.chat.style;
 
-import org.spongepowered.api.text.TextFormat;
-import org.spongepowered.api.text.action.ClickAction;
-import org.spongepowered.api.text.action.HoverAction;
+import com.google.common.base.Optional;
 
-public interface RawMessageBuilder {
+import java.awt.Color;
+import java.util.Collection;
 
-    RawMessage build();
+public interface TextStyle {
 
-    RawMessageBuilder setText(String text);
+    Color getColor();
 
-    RawMessageBuilder addExtra(RawMessage extra);
+    TextStyle and(TextStyle that);
 
-    RawMessageBuilder addExtra(Iterable<RawMessage> extra);
+    boolean isBold();
 
-    RawMessageBuilder addExtra(RawMessage... extra);
+    boolean isItalic();
 
-    RawMessageBuilder setFormat(TextFormat format);
+    boolean isUnderline();
 
-    RawMessageBuilder setInsertion(String insertion);
+    boolean isStrikethrough();
 
-    <V> RawMessageBuilder setClickAction(ClickAction<V> clickAction);
+    boolean isObfuscated();
 
-    <V> RawMessageBuilder setHoverAction(HoverAction<V> hoverAction);
+    boolean isComposite();
 
-    RawMessageBuilder setTranslationIdentifier(String translationIdentifier);
-
-    RawMessageBuilder setScore(Score score);
+    /**
+     * Gets a list of Minecraft formatting codes that, when put together
+     * and applied, have the same effect as this TextFormat.
+     *
+     * @return a List of Minecraft formatting codes
+     */
+    @Deprecated
+    Optional<Collection<Character>> getCodes();
 
 }

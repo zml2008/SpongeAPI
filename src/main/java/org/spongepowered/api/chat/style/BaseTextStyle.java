@@ -1,10 +1,8 @@
-package org.spongepowered.api.text;
+package org.spongepowered.api.chat.style;
 
 import com.google.common.base.Optional;
 
-import java.util.List;
-
-public interface SingleTextFormat extends TextFormat {
+public interface BaseTextStyle extends TextStyle {
 
     String getName();
 

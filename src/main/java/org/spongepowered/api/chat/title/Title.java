@@ -22,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.title;
+package org.spongepowered.api.chat.title;
 
 import org.spongepowered.api.entity.Player;
-import org.spongepowered.api.text.raw.RawMessage;
+import org.spongepowered.api.chat.RawMessage;
 
 /**
  * Represents a configuration of a title. It consists of a main title and a

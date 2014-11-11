@@ -22,39 +22,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text;
+package org.spongepowered.api.chat.action;
 
-import com.google.common.base.Optional;
+public interface TextAction<V> {
 
-import java.awt.Color;
-import java.util.Collection;
-import java.util.List;
+    String getName();
 
-public interface TextFormat {
-
-    Color getColor();
-
-    boolean isBold();
-
-    boolean isItalic();
-
-    boolean isUnderline();
-
-    boolean isStrikethrough();
-
-    boolean isObfuscated();
-
-    boolean isComposite();
-
-    /**
-     * Gets a list of Minecraft formatting codes that, when put together
-     * and applied, have the same effect as this TextFormat.
-     *
-     * @return a List of Minecraft formatting codes
-     */
-    @Deprecated
-    Optional<Collection<Character>> getCodes();
-
-    TextFormat and(TextFormat that);
+    V getValue();
 
 }

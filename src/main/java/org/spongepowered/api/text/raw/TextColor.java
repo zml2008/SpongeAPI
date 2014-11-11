@@ -2,13 +2,12 @@ package org.spongepowered.api.text.raw;
 
 import com.google.common.base.Optional;
 
+import java.awt.*;
+
 public interface TextColor {
 
-    int getRed();
-
-    int getGreen();
-
-    int getBlue();
+    // get color
+    Color getColor();
 
     /**
      * For colors that support it(meaning default Minecraft ones),

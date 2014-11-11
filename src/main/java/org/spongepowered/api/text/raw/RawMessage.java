@@ -1,5 +1,8 @@
 package org.spongepowered.api.text.raw;
 
+import org.spongepowered.api.text.raw.action.ClickAction;
+import org.spongepowered.api.text.raw.action.HoverAction;
+
 public interface RawMessage {
 
     String getText();
@@ -18,11 +21,11 @@ public interface RawMessage {
 
     boolean getObfuscated();
 
-    boolean getInsertion();
+    String getInsertion();
 
-    ClickAction getClickEventHandler();
+    ClickAction getClickAction();
 
-    HoverEventHandler getHoverEventHandler();
+    HoverAction getHoverAction();
 
     String getTranslationIdentifier();
 

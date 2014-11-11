@@ -28,31 +28,31 @@ import org.spongepowered.api.text.action.ClickAction;
 import org.spongepowered.api.text.action.HoverAction;
 import org.spongepowered.api.text.style.TextStyle;
 
-public interface RawMessageBuilder {
+public interface MessageBuilder {
 
-    RawMessage build();
+    Message build();
 
-    RawMessageBuilder setText(String text);
+    MessageBuilder setText(String text);
 
-    RawMessageBuilder addExtra(RawMessage extra);
+    MessageBuilder addExtra(Message extra);
 
-    RawMessageBuilder addExtra(Iterable<RawMessage> extra);
+    MessageBuilder addExtra(Iterable<Message> extra);
 
-    RawMessageBuilder addExtra(RawMessage... extra);
+    MessageBuilder addExtra(Message... extra);
 
-    RawMessageBuilder setFormat(TextStyle format);
+    MessageBuilder setFormat(TextStyle format);
 
-    RawMessageBuilder setInsertion(String insertion);
+    MessageBuilder setInsertion(String insertion);
 
-    <V> RawMessageBuilder setClickAction(ClickAction<V> clickAction);
+    <V> MessageBuilder setClickAction(ClickAction<V> clickAction);
 
-    <V> RawMessageBuilder setHoverAction(HoverAction<V> hoverAction);
+    <V> MessageBuilder setHoverAction(HoverAction<V> hoverAction);
 
-    RawMessageBuilder setTranslationIdentifier(String translationIdentifier);
+    MessageBuilder setTranslationIdentifier(String translationIdentifier);
 
     // TODO score api
-    RawMessageBuilder setScore(Object score);
+    MessageBuilder setScore(Object score);
 
-    RawMessageBuilder overrideScore(Object score, String value);
+    MessageBuilder overrideScore(Object score, String value);
 
 }

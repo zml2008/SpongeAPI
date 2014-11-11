@@ -29,11 +29,11 @@ import org.spongepowered.api.text.action.HoverAction;
 
 import java.util.List;
 
-public interface RawMessage extends StyledMessage {
+public interface Message extends StyledMessage {
 
     String getText();
 
-    List<RawMessage> getExtra();
+    List<Message> getExtra();
 
     String getInsertion();
 

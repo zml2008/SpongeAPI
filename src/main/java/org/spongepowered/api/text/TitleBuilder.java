@@ -24,12 +24,5 @@
  */
 package org.spongepowered.api.text;
 
-import org.spongepowered.api.text.style.TextStyle;
-
-public interface StyledMessage {
-
-    String getText();
-
-    TextStyle getStyle();
-
+public interface TitleBuilder {
 }

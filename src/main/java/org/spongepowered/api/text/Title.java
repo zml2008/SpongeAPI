@@ -22,10 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.title;
+package org.spongepowered.api.text;
 
 import org.spongepowered.api.entity.Player;
-import org.spongepowered.api.text.RawMessage;
 
 /**
  * Represents a configuration of a title. It consists of a main title and a
@@ -40,7 +39,7 @@ public interface Title {
      * @param text The text to use as the title.
      * @return This title configuration.
      */
-    Title title(RawMessage text);
+    Title title(Message text);
 
     /**
      * Set the subtitle to send to the player.
@@ -48,7 +47,7 @@ public interface Title {
      * @param text The text to use as the subtitle.
      * @return This title configuration.
      */
-    Title subTitle(RawMessage text);
+    Title subTitle(Message text);
 
     /**
      * Set the duration in ticks of the fade in effect of the title. Once this

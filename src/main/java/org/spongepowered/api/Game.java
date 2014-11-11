@@ -30,8 +30,8 @@ import org.spongepowered.api.entity.Player;
 import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.plugin.PluginManager;
 import org.spongepowered.api.service.scheduler.Scheduler;
-import org.spongepowered.api.text.RawMessage;
-import org.spongepowered.api.text.title.Title;
+import org.spongepowered.api.text.Message;
+import org.spongepowered.api.text.Title;
 import org.spongepowered.api.world.World;
 
 import java.util.Collection;
@@ -142,7 +142,7 @@ public interface Game {
      *
      * @param message The message to send
      */
-    void broadcastMessage(RawMessage message);
+    void broadcastMessage(Message message);
 
     /**
      * Creates a new clean {@link Title} configuration that will reset the

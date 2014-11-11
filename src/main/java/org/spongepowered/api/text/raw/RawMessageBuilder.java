@@ -24,10 +24,9 @@
  */
 package org.spongepowered.api.text.raw;
 
+import org.spongepowered.api.text.TextFormat;
 import org.spongepowered.api.text.action.ClickAction;
 import org.spongepowered.api.text.action.HoverAction;
-
-import java.util.List;
 
 public interface RawMessageBuilder {
 
@@ -41,17 +40,7 @@ public interface RawMessageBuilder {
 
     RawMessageBuilder addExtra(RawMessage... extra);
 
-    RawMessageBuilder setColor(TextColor color);
-
-    RawMessageBuilder setBold(boolean bold);
-
-    RawMessageBuilder setUnderlined(boolean underlined);
-
-    RawMessageBuilder setItalic(boolean italic);
-
-    RawMessageBuilder setStrikethrough(boolean strikethrough);
-
-    RawMessageBuilder setObfuscated(boolean obfuscated);
+    RawMessageBuilder setFormat(TextFormat format);
 
     RawMessageBuilder setInsertion(String insertion);
 

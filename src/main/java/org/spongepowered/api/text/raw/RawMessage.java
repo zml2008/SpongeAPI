@@ -24,6 +24,7 @@
  */
 package org.spongepowered.api.text.raw;
 
+import org.spongepowered.api.text.TextFormat;
 import org.spongepowered.api.text.action.ClickAction;
 import org.spongepowered.api.text.action.HoverAction;
 
@@ -37,15 +38,7 @@ public interface RawMessage {
 
     TextFormat getColor();
 
-    boolean getBold();
-
-    boolean getUnderlined();
-
-    boolean getItalic();
-
-    boolean getStrikethrough();
-
-    boolean getObfuscated();
+    TextFormat getFormat();
 
     String getInsertion();
 

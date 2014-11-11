@@ -84,7 +84,6 @@ public interface Title {
      */
     Title fadeOut(int ticks);
 
-
     /**
      * Remove the currently displayed title from the player's screen. This will
      * keep the currently used display times and will only remove the title.
@@ -100,7 +99,6 @@ public interface Title {
      * @return This title configuration.
      */
     Title reset();
-
 
     /**
      * Send this title configuration to the specified player. This is the same

@@ -22,27 +22,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.raw;
+package org.spongepowered.api.text;
 
-public class TextColors {
+import com.google.common.base.Optional;
 
-    public static final TextColor BLACK = null;
-    public static final TextColor DARK_BLUE = null;
-    public static final TextColor DARK_GREEN = null;
-    public static final TextColor DARK_AQUA = null;
-    public static final TextColor DARK_RED = null;
-    public static final TextColor DARK_PURPLE = null;
-    public static final TextColor GOLD = null;
-    public static final TextColor GRAY = null;
-    public static final TextColor DARK_GRAY = null;
-    public static final TextColor BLUE = null;
-    public static final TextColor GREEN = null;
-    public static final TextColor AQUA = null;
-    public static final TextColor RED = null;
-    public static final TextColor LIGHT_PURPLE = null;
-    public static final TextColor YELLOW = null;
-    public static final TextColor WHITE = null;
+import java.awt.Color;
+import java.util.Collection;
+import java.util.List;
 
-    public static final TextColor RESET = null;
-    
+public interface TextFormat {
+
+    Color getColor();
+
+    boolean isBold();
+
+    boolean isItalic();
+
+    boolean isUnderline();
+
+    boolean isStrikethrough();
+
+    boolean isObfuscated();
+
+    boolean isComposite();
+
+    /**
+     * Gets a list of Minecraft formatting codes that, when put together
+     * and applied, have the same effect as this TextFormat.
+     *
+     * @return a List of Minecraft formatting codes
+     */
+    @Deprecated
+    Optional<Collection<Character>> getCodes();
+
+    TextFormat and(TextFormat that);
+
 }

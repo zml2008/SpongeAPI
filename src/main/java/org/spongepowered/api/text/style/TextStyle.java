@@ -35,6 +35,8 @@ public interface TextStyle {
 
     TextStyle and(TextStyle that);
 
+    TextStyle negate();
+
     boolean isBold();
 
     boolean isItalic();

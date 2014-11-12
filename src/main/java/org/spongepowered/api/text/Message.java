@@ -39,9 +39,9 @@ public interface Message {
 
     String getInsertion();
 
-    ClickAction getClickAction();
+    ClickAction<?> getClickAction();
 
-    HoverAction getHoverAction();
+    HoverAction<?> getHoverAction();
 
     String getTranslationIdentifier();
 

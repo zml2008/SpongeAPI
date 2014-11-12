@@ -26,12 +26,14 @@ package org.spongepowered.api.text;
 
 import org.spongepowered.api.text.action.ClickAction;
 import org.spongepowered.api.text.action.HoverAction;
+import org.spongepowered.api.text.style.TextStyle;
 
 import java.util.List;
 
-public interface Message extends StyledMessage {
+public interface Message {
 
     String getText();
+    TextStyle getStyle();
 
     List<Message> getExtra();
 

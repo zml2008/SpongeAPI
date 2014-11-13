@@ -41,6 +41,8 @@ public interface Boat extends Entity {
      * Gets the maximum speed that this boat is
      * allowed to travel at.
      *
+     * Default value is 0.4
+     *
      * @return The maximum speed.
      */
     double getMaxSpeed();
@@ -49,8 +51,25 @@ public interface Boat extends Entity {
      * Sets the maximum speed that this boat is
      * allowed to travel at.
      *
+     * Default value is 0.4
+     *
      * @param maxSpeed The new max speed.
      */
     void setMaxSpeed(double maxSpeed);
 
+    /**
+     * Gets whether or not the boat is able to
+     * move freely on land.
+     *
+     * @return If the boat can move on land.
+     */
+    boolean getMoveOnLand();
+
+    /**
+     * Gets whether or not the boat is able to
+     * move freely on land.
+     *
+     * @param moveOnLand If the boat can move on land.
+     */
+    void setMoveOnLand(boolean moveOnLand);
 }

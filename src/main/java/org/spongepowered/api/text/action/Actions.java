@@ -30,7 +30,7 @@ import org.spongepowered.api.text.Message;
 
 import java.net.URL;
 
-public class Actions {
+public final class Actions {
 
     private static final ActionFactory factory = new NullActionFactory();
 

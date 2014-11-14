@@ -35,6 +35,8 @@ public interface MessageBuilder<T> {
 
     MessageBuilder<T> append(Iterable<Message<?>> child);
 
+    MessageBuilder<T> content(T content);
+
 
     MessageBuilder<T> color(TextColor color);
 

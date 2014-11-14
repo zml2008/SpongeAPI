@@ -63,7 +63,6 @@ public interface Message<T> extends Iterable<Message<T>> {
     }
 
     // TODO use Score
-    // should this REALLY be a message? it's so different
     interface Score extends Message<Object> {
 
         Optional<String> getOverride();

@@ -47,6 +47,8 @@ public interface Player extends HumanEntity, CommandSource {
     String getDisplayName();
 
     // TODO: Javadocs
+    void sendMessage(ChatPosition position, String... message);
+
     void sendMessage(ChatPosition position, Message<?>... messages);
 
     void sendMessage(ChatPosition position, Iterable<Message<?>> messages);

@@ -46,6 +46,10 @@ public final class Messages {
         return factory.createScoreBuilder(score, override);
     }
 
+    public static <T> Message<T> of(T message) {
+        return builder(message).build();
+    }
+
     @Deprecated
     public static char getLegacyChar() {
         return factory.getColorChar();

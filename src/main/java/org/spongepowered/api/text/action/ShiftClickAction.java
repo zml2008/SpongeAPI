@@ -37,8 +37,6 @@ public interface ShiftClickAction<R> extends TextAction<R> {
     /**
      * Inserts some text into the chat prompt.
      */
-    interface InsertText extends ShiftClickAction<String> {
-
-    }
+    interface InsertText extends ShiftClickAction<String> { }
 
 }

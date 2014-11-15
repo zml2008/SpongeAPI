@@ -38,25 +38,19 @@ public interface HoverAction<R> extends TextAction<R> {
     /**
      * Shows some text.
      */
-    interface ShowText extends HoverAction<Message<?>> {
-
-    }
+    interface ShowText extends HoverAction<Message<?>> { }
 
     /**
      * Shows an item and its information.
      */
-    interface ShowItem extends HoverAction<ItemStack> {
-
-    }
+    interface ShowItem extends HoverAction<ItemStack> { }
 
     // TODO replace with achievement
 
     /**
      * Shows an achievement and its information.
      */
-    interface ShowAchievement extends HoverAction<Object> {
-
-    }
+    interface ShowAchievement extends HoverAction<Object> { }
 
     /**
      * Shows an entity and its information.

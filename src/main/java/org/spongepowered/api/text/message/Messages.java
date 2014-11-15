@@ -26,6 +26,9 @@ package org.spongepowered.api.text.message;
 
 import org.spongepowered.api.text.translation.Translation;
 
+/**
+ * Utility class to work with and create Messages.
+ */
 public final class Messages {
 
     private static final MessageFactory factory = new NullMessageFactory();
@@ -33,55 +36,132 @@ public final class Messages {
     private Messages() {
     }
 
+    /**
+     * Creates a new MessageBuilder.
+     *
+     * @param content The content of the Message
+     * @param <T> The type parameter of the Message
+     * @return A new MessageBuilder
+     */
     public static <T> MessageBuilder<T> builder(T content) {
         return factory.createBuilder(content);
     }
 
-    public static MessageBuilder<Translation> builder(Translation t, Object... args) {
-        return factory.createTranslationBuilder(t, args);
+    /**
+     * Creates a new MessageBuilder that builds {@link org.spongepowered.api.text.translation.Translation} messages.
+     *
+     * @param translation The translation of the Message
+     * @param args The arguments to the translation
+     * @return A new MessageBuilder
+     */
+    public static MessageBuilder<Translation> builder(Translation translation, Object... args) {
+        return factory.createTranslationBuilder(translation, args);
     }
 
     // TODO: Score API
+    /**
+     * Creates a new MessageBuilder that builds {@link org.spongepowered.api.text.message.Message.Score} messages.
+     * If you wish to not override the score, use the {@link #builder(Object)} method.
+     *
+     * @param score The score of the Message
+     * @param override The override of the score
+     * @return A
+     */
     public static MessageBuilder<Object> builder(Object score, String override) {
         return factory.createScoreBuilder(score, override);
     }
 
-    public static <T> Message<T> of(T message) {
-        return builder(message).build();
+    /**
+     * Creates a new MessageBuilder out of the given content and builds it immediately.
+     * This is a shorthand to {@link #builder(Object)}.
+     *
+     * @param content The content of the Message
+     * @param <T> The type parameter of the Message
+     * @return A new MessageBuilder
+     */
+    public static <T> Message<T> of(T content) {
+        return builder(content).build();
     }
 
+    /**
+     * Returns the default legacy formatting character.
+     *
+     * @return The legacy formatting character
+     */
     @Deprecated
     public static char getLegacyChar() {
         return factory.getColorChar();
     }
 
+    /**
+     * Creates a Message from a legacy string using the default legacy.
+     *
+     * @param message The message to be converted as a String
+     * @return The converted Message
+     */
     @Deprecated
-    public static Message<?> fromLegacy(String message) {
+    public static Message.Text fromLegacy(String message) {
         return fromLegacy(message, getLegacyChar());
     }
 
+    /**
+     * Creates a Message from a legacy string, given a color character.
+     *
+     * @param message The message to be converted as a String
+     * @param color The color character to be replaced
+     * @return The converted Message
+     */
     @Deprecated
-    public static Message<?> fromLegacy(String message, char color) {
+    public static Message.Text fromLegacy(String message, char color) {
         return factory.parseCodes(message, color);
     }
 
+    /**
+     * Removes the legacy formatting character from a legacy string.
+     *
+     * @param message The legacy message as a String
+     * @return The stripped message
+     */
     @Deprecated
     public static String stripCodes(String message) {
         return stripCodes(message, getLegacyChar());
     }
 
+    /**
+     * Removes the legacy formatting character from a legacy string.
+     *
+     * @param message The legacy message as a String
+     * @param color The color character to be replaced
+     * @return The stripped message
+     */
     @Deprecated
     public static String stripCodes(String message, char color) {
         return factory.stripCodes(message, color);
     }
 
+    /**
+     * Replaces the given formatting character with the default legacy formatting character from a legacy string.
+     *
+     * @param message The legacy message as a String
+     * @param from The color character to be replaced
+     * @return The replaced message
+     */
     @Deprecated
-    public static String translateCodes(String message, char from) {
-        return translateCodes(message, from, getLegacyChar());
+    public static String replaceCodes(String message, char from) {
+        return replaceCodes(message, from, getLegacyChar());
     }
 
+    /**
+     * Replaces the given formatting character with another given formatting character from a legacy string.
+     *
+     * @param message The legacy message as a String
+     * @param from The color character to be replaced
+     * @param to The color character to replace with
+     * @return The replaced message
+     */
     @Deprecated
-    public static String translateCodes(String message, char from, char to) {
-        return factory.translateCodes(message, from, to);
+    public static String replaceCodes(String message, char from, char to) {
+        return factory.replaceCodes(message, from, to);
     }
+
 }

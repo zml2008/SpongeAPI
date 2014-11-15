@@ -106,19 +106,14 @@ public interface Message<T> extends Iterable<Message<T>> {
      * A Text Message is a message with a String as content.
      * In JSON, the content getter maps to the text field.
      */
-    interface Text extends Message<String> {
-
-    }
+    interface Text extends Message<String> { }
 
     /**
      * A Translatable Message is a message with a Translation as content.
      * Whatever locale the client is using translates this message using the translation identifier.
      * In JSON, the content getter maps to the translation identifier.
      */
-    interface Translatable extends Message<Translation> {
-
-    }
-
+    interface Translatable extends Message<Translation> { }
 
     /**
      * A Selector Message is a message with a Selector as content.

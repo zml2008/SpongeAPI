@@ -88,8 +88,6 @@ public interface TextStyle {
      * Base extends FormattingCode because it does have a corresponding formatting code;
      * it is a single, pure text style.
      */
-    interface Base extends FormattingCode, TextStyle {
-
-    }
+    interface Base extends FormattingCode, TextStyle { }
 
 }

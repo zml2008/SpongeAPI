@@ -34,12 +34,14 @@ interface MessageFactory {
 
     MessageBuilder<Object> createScoreBuilder(Object score, String override); // TODO
 
+    // TODO selector builder?
+
     char getColorChar();
 
-    Message<?> parseCodes(String message, char color);
+    Message.Text parseCodes(String message, char color);
 
     String stripCodes(String message, char color);
 
-    String translateCodes(String message, char from, char to);
+    String replaceCodes(String message, char from, char to);
 
 }

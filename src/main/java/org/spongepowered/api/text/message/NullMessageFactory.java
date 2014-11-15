@@ -49,7 +49,7 @@ class NullMessageFactory implements MessageFactory {
     }
 
     @Override
-    public Message<?> parseCodes(String message, char color) {
+    public Message.Text parseCodes(String message, char color) {
         return null;
     }
 
@@ -59,7 +59,7 @@ class NullMessageFactory implements MessageFactory {
     }
 
     @Override
-    public String translateCodes(String message, char from, char to) {
+    public String replaceCodes(String message, char from, char to) {
         return null;
     }
 }

@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text;
+package org.spongepowered.api.text.message;
 
 import com.google.common.base.Optional;
 import org.spongepowered.api.text.action.ClickAction;
@@ -36,7 +36,7 @@ import java.util.List;
 
 /**
  * A Message represents some text in the new raw JSON message format.
- * Message is an immutable class that is created by a {@link org.spongepowered.api.text.MessageBuilder},
+ * Message is an immutable class that is created by a {@link MessageBuilder},
  * and each getter method maps to a field or some fields in JSON.
  * Message is also an {@link Iterable} whose iterator iterates over its children, children's children, etc. recursively.
  *

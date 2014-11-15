@@ -25,7 +25,7 @@
 package org.spongepowered.api.text.format;
 
 /**
- * A TextStyle represents the style that a {@link org.spongepowered.api.text.Message} has.
+ * A TextStyle represents the style that a {@link org.spongepowered.api.text.message.Message} has.
  * It is an immutable class.
  * There are several Base styles specified in {@link org.spongepowered.api.text.format.TextStyles}
  * which are the Minecraft base types.
@@ -58,7 +58,7 @@ public interface TextStyle {
 
     /**
      * Negates this text style.
-     * This is useful for undoing text styles that are inherited by parent Messages.
+     * This is useful for undoing text styles that are inherited from parent Messages.
      *
      * @return A new TextStyle that is the inverse of this TextStyle.
      */
@@ -85,7 +85,8 @@ public interface TextStyle {
      * A Base text style is a text style that is represented in Minecraft.
      * There are several Base styles specified in {@link org.spongepowered.api.text.format.TextStyles}
      * which are the Minecraft base types.
-     * Base extends FormattingCode because it does have a corresponding formatting code.
+     * Base extends FormattingCode because it does have a corresponding formatting code;
+     * it is a single, pure text style.
      */
     interface Base extends FormattingCode, TextStyle {
 

@@ -27,7 +27,7 @@ package org.spongepowered.api.text.format;
 import java.awt.Color;
 
 /**
- * A TextColor represents a color that a {@link org.spongepowered.api.text.Message} has.
+ * A TextColor represents a color that a {@link org.spongepowered.api.text.message.Message} has.
  * It has is a FormattingCode because it corresponds to one of the Minecraft color codes.
  * A list of the default text colors provided in Minecraft is provided in {@link org.spongepowered.api.text.format.TextColors}
  */

@@ -22,32 +22,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text;
+package org.spongepowered.api.text.message;
 
-import org.spongepowered.api.text.action.ClickAction;
-import org.spongepowered.api.text.action.HoverAction;
-import org.spongepowered.api.text.action.ShiftClickAction;
-import org.spongepowered.api.text.format.TextColor;
-import org.spongepowered.api.text.format.TextStyle;
+import org.spongepowered.api.text.translation.Translation;
 
-public interface MessageBuilder<T> {
+class NullMessageFactory implements MessageFactory {
 
-    MessageBuilder<T> append(Message<?>... children);
+    @Override
+    public <T> MessageBuilder<T> createBuilder(T content) {
+        return null;
+    }
 
-    MessageBuilder<T> append(Iterable<Message<?>> child);
+    @Override
+    public MessageBuilder<Translation> createTranslationBuilder(Translation t, Object... args) {
+        return null;
+    }
 
-    MessageBuilder<T> content(T content);
+    @Override
+    public MessageBuilder<Object> createScoreBuilder(Object score, String override) {
+        return null;
+    }
 
-    MessageBuilder<T> color(TextColor color);
+    @Override
+    public char getColorChar() {
+        return 0;
+    }
 
-    MessageBuilder<T> style(TextStyle style);
+    @Override
+    public Message<?> parseCodes(String message, char color) {
+        return null;
+    }
 
-    MessageBuilder<T> onClick(ClickAction<?> action);
+    @Override
+    public String stripCodes(String message, char color) {
+        return null;
+    }
 
-    MessageBuilder<T> onHover(HoverAction<?> action);
-
-    MessageBuilder<T> onShiftClick(ShiftClickAction<?> action);
-
-    Message<T> build();
-
+    @Override
+    public String translateCodes(String message, char from, char to) {
+        return null;
+    }
 }

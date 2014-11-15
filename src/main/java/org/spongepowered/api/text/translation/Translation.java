@@ -26,11 +26,18 @@ package org.spongepowered.api.text.translation;
 
 import com.google.common.base.Optional;
 
+/**
+ *
+ */
 public interface Translation {
 
-    Optional<String> getId();
+    String getId();
 
     String get();
 
     String get(Object... args);
+    // TODO locale api
+    String get(Object locale);
+    String get(Object locale, Object... args);
+
 }

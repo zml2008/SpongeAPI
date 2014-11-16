@@ -25,9 +25,11 @@
 
 package org.spongepowered.api.item.inventory;
 
+import org.spongepowered.api.item.Enchantment;
 import org.spongepowered.api.item.ItemType;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Represents a stack of a specific {@link ItemType}. Allows comparison to another
@@ -91,4 +93,10 @@ public interface ItemStack extends Comparable<ItemStack>, Serializable {
      */
     void setMaxStackQuantity(int quantity);
 
+    /**
+     * Get the enchantments applied to this stack with their levels.
+     *
+     * @return Map of enchantments to current levels
+     */
+    Map<Enchantment, Integer> getEnchantments();
 }

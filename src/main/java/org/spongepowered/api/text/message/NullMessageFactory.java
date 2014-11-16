@@ -62,4 +62,5 @@ class NullMessageFactory implements MessageFactory {
     public String replaceCodes(String message, char from, char to) {
         return null;
     }
+
 }

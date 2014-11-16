@@ -24,11 +24,20 @@
  */
 package org.spongepowered.api.text.format;
 
+import com.google.common.base.Optional;
+
+import java.util.List;
+
 /**
  * TextStyles is a list of the default text styles that Minecraft provides.
  * The values are filled in by mixins in Sponge at runtime.
  */
-public class TextStyles {
+public final class TextStyles {
+
+    static final TextFormatFactory factory = new NullTextFormatFactory();
+
+    private TextStyles() {
+    }
 
     public static final TextStyle.Base OBFUSCATED = null;
     public static final TextStyle.Base BOLD = null;
@@ -37,5 +46,17 @@ public class TextStyles {
     public static final TextStyle.Base ITALIC = null;
 
     public static final TextStyle.Base RESET = null;
+
+    public static Optional<TextStyle> valueOf(String name) {
+        return Optional.fromNullable(factory.parseStyle(name));
+    }
+
+    public static List<TextStyle> getValues() {
+        return factory.getStyles();
+    }
+
+    public static TextStyle of(TextStyle... styles) {
+        return factory.createStyle(styles);
+    }
 
 }

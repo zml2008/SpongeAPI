@@ -102,6 +102,9 @@ public interface Message<T> extends Iterable<Message<T>> {
      */
     Optional<ShiftClickAction<?>> getShiftClickAction();
 
+    // TODO: Javadocs
+    MessageBuilder<T> builder();
+
     /**
      * A Text Message is a message with a String as content.
      * In JSON, the content getter maps to the text field.

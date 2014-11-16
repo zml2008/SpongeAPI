@@ -30,11 +30,9 @@ interface MessageFactory {
 
     <T> MessageBuilder<T> createBuilder(T content);
 
-    MessageBuilder<Translation> createTranslationBuilder(Translation t, Object... args);
+    MessageBuilder<Translation> createTranslationBuilder(Translation t, Object[] args);
 
-    MessageBuilder<Object> createScoreBuilder(Object score, String override); // TODO
-
-    // TODO selector builder?
+    MessageBuilder<Object> createScoreBuilder(Object score, String override); // TODO: Scoreboard API
 
     char getColorChar();
 

@@ -34,7 +34,7 @@ class NullMessageFactory implements MessageFactory {
     }
 
     @Override
-    public MessageBuilder<Translation> createTranslationBuilder(Translation t, Object... args) {
+    public MessageBuilder<Translation> createTranslationBuilder(Translation t, Object[] args) {
         return null;
     }
 

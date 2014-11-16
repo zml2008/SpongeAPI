@@ -40,7 +40,7 @@ public interface MessageBuilder<T> {
 
     MessageBuilder<T> color(TextColor color);
 
-    MessageBuilder<T> style(TextStyle style);
+    MessageBuilder<T> style(TextStyle... styles);
 
     MessageBuilder<T> onClick(ClickAction<?> action);
 

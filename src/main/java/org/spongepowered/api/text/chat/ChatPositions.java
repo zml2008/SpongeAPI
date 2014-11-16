@@ -24,11 +24,20 @@
  */
 package org.spongepowered.api.text.chat;
 
+import com.google.common.base.Optional;
+
+import java.util.List;
+
 /**
  * ChatPositions is a list of the default chat positions that are available in Minecraft.
  * The values are filled in by mixins in Sponge at runtime.
  */
-public class ChatPositions {
+public final class ChatPositions {
+    private static final ChatPositionFactory factory = new NullChatPositionFactory();
+
+    private ChatPositions() {
+
+    }
 
     /**
      * The standard chat position in prompt at the bottom-left.
@@ -48,4 +57,11 @@ public class ChatPositions {
      */
     public static final ChatPosition ACTION_BAR = null;
 
+    public static Optional<ChatPosition> valueOf(String name) {
+        return Optional.fromNullable(factory.parsePosition(name));
+    }
+
+    public static List<ChatPosition> getValues() {
+        return factory.getPositions();
+    }
 }

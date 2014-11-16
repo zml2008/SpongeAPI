@@ -24,11 +24,18 @@
  */
 package org.spongepowered.api.text.format;
 
+import com.google.common.base.Optional;
+
+import java.util.List;
+
 /**
  * TextColors is a list of the default text colors that Minecraft provides.
  * The values are filled in by mixins in Sponge at runtime.
  */
-public class TextColors {
+public final class TextColors {
+
+    private TextColors() {
+    }
 
     public static final TextColor.Base BLACK = null;
     public static final TextColor.Base DARK_BLUE = null;
@@ -46,6 +53,14 @@ public class TextColors {
     public static final TextColor.Base LIGHT_PURPLE = null;
     public static final TextColor.Base YELLOW = null;
     public static final TextColor.Base WHITE = null;
+
+    public static Optional<TextColor> valueOf(String name) {
+        return Optional.fromNullable(TextStyles.factory.parseColor(name));
+    }
+
+    public static List<TextColor> getValues() {
+        return TextStyles.factory.getColors();
+    }
 
     // TODO: There doesn't seem to be a difference to WHITE
     // Unlike with the old color codes, this will not reset the chat style, just the color

@@ -30,53 +30,50 @@ import org.spongepowered.api.text.message.Message;
 
 import java.net.URL;
 
-public final class Actions {
+class NullTextActionFactory implements TextActionFactory {
 
-    private static final ActionFactory factory = new NullActionFactory();
-
-    private Actions() {
+    @Override
+    public ClickAction.OpenUrl createOpenUrl(URL url) {
+        return null;
     }
 
-    // Click actions
-
-    public static ClickAction.OpenUrl openUrl(URL url) {
-        return factory.createOpenUrl(url);
+    @Override
+    public ClickAction.RunCommand createRunCommand(String command) {
+        return null;
     }
 
-    public static ClickAction.RunCommand runCommand(String command) {
-        return factory.createRunCommand(command);
+    @Override
+    public ClickAction.ChangePage createChangePage(int page) {
+        return null;
     }
 
-    public static ClickAction.ChangePage changePage(int page) {
-        return factory.createChangePage(page);
+    @Override
+    public ClickAction.SuggestCommand createSuggestCommand(String command) {
+        return null;
     }
 
-    public static ClickAction.SuggestCommand suggestCommand(String command) {
-        return factory.createSuggestCommand(command);
+    @Override
+    public HoverAction.ShowText createShowText(Message<?> text) {
+        return null;
     }
 
-    // Hover actions
-
-    public static HoverAction.ShowText showText(Message<?> text) {
-        return factory.createShowText(text);
+    @Override
+    public HoverAction.ShowItem createShowItem(ItemStack item) {
+        return null;
     }
 
-    public static HoverAction.ShowItem showItem(ItemStack item) {
-        return factory.createShowItem(item);
+    @Override
+    public HoverAction.ShowAchievement createShowAchievement(Object achievement) {
+        return null;
     }
 
-    public static HoverAction.ShowAchievement showAchievement(Object achievement) {
-        return factory.createShowAchievement(achievement);
+    @Override
+    public HoverAction.ShowEntity createShowEntity(Entity entity) {
+        return null;
     }
 
-    public static HoverAction.ShowEntity showEntity(Entity entity) {
-        return factory.createShowEntity(entity);
+    @Override
+    public ShiftClickAction.InsertText createInsertText(String text) {
+        return null;
     }
-
-    // Shift click actions
-
-    public static ShiftClickAction.InsertText insertText(String text) {
-        return factory.createInsertText(text);
-    }
-
 }

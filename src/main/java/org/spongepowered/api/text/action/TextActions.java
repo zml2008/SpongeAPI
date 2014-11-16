@@ -30,30 +30,53 @@ import org.spongepowered.api.text.message.Message;
 
 import java.net.URL;
 
-interface ActionFactory {
+public final class TextActions {
+
+    private static final TextActionFactory factory = new NullTextActionFactory();
+
+    private TextActions() {
+    }
 
     // Click actions
 
-    ClickAction.OpenUrl createOpenUrl(URL url);
+    public static ClickAction.OpenUrl openUrl(URL url) {
+        return factory.createOpenUrl(url);
+    }
 
-    ClickAction.RunCommand createRunCommand(String command);
+    public static ClickAction.RunCommand runCommand(String command) {
+        return factory.createRunCommand(command);
+    }
 
-    ClickAction.ChangePage createChangePage(int page);
+    public static ClickAction.ChangePage changePage(int page) {
+        return factory.createChangePage(page);
+    }
 
-    ClickAction.SuggestCommand createSuggestCommand(String command);
+    public static ClickAction.SuggestCommand suggestCommand(String command) {
+        return factory.createSuggestCommand(command);
+    }
 
     // Hover actions
 
-    HoverAction.ShowText createShowText(Message<?> text);
+    public static HoverAction.ShowText showText(Message<?> text) {
+        return factory.createShowText(text);
+    }
 
-    HoverAction.ShowItem createShowItem(ItemStack item);
+    public static HoverAction.ShowItem showItem(ItemStack item) {
+        return factory.createShowItem(item);
+    }
 
-    HoverAction.ShowAchievement createShowAchievement(Object achievement);
+    public static HoverAction.ShowAchievement showAchievement(Object achievement) {
+        return factory.createShowAchievement(achievement);
+    }
 
-    HoverAction.ShowEntity createShowEntity(Entity entity);
+    public static HoverAction.ShowEntity showEntity(Entity entity) {
+        return factory.createShowEntity(entity);
+    }
 
     // Shift click actions
 
-    ShiftClickAction.InsertText createInsertText(String text);
+    public static ShiftClickAction.InsertText insertText(String text) {
+        return factory.createInsertText(text);
+    }
 
 }

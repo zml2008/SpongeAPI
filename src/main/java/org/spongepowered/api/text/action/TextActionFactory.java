@@ -30,50 +30,30 @@ import org.spongepowered.api.text.message.Message;
 
 import java.net.URL;
 
-class NullActionFactory implements ActionFactory {
+interface TextActionFactory {
 
-    @Override
-    public ClickAction.OpenUrl createOpenUrl(URL url) {
-        return null;
-    }
+    // Click actions
 
-    @Override
-    public ClickAction.RunCommand createRunCommand(String command) {
-        return null;
-    }
+    ClickAction.OpenUrl createOpenUrl(URL url);
 
-    @Override
-    public ClickAction.ChangePage createChangePage(int page) {
-        return null;
-    }
+    ClickAction.RunCommand createRunCommand(String command);
 
-    @Override
-    public ClickAction.SuggestCommand createSuggestCommand(String command) {
-        return null;
-    }
+    ClickAction.ChangePage createChangePage(int page);
 
-    @Override
-    public HoverAction.ShowText createShowText(Message<?> text) {
-        return null;
-    }
+    ClickAction.SuggestCommand createSuggestCommand(String command);
 
-    @Override
-    public HoverAction.ShowItem createShowItem(ItemStack item) {
-        return null;
-    }
+    // Hover actions
 
-    @Override
-    public HoverAction.ShowAchievement createShowAchievement(Object achievement) {
-        return null;
-    }
+    HoverAction.ShowText createShowText(Message<?> text);
 
-    @Override
-    public HoverAction.ShowEntity createShowEntity(Entity entity) {
-        return null;
-    }
+    HoverAction.ShowItem createShowItem(ItemStack item);
 
-    @Override
-    public ShiftClickAction.InsertText createInsertText(String text) {
-        return null;
-    }
+    HoverAction.ShowAchievement createShowAchievement(Object achievement);
+
+    HoverAction.ShowEntity createShowEntity(Entity entity);
+
+    // Shift click actions
+
+    ShiftClickAction.InsertText createInsertText(String text);
+
 }

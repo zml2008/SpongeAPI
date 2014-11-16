@@ -22,29 +22,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.text.title;
+package org.spongepowered.api.text.translation;
 
-import com.google.common.base.Optional;
-import org.spongepowered.api.entity.Player;
-import org.spongepowered.api.text.message.Message;
-
-public interface Title {
-
-    Optional<Message<?>> getTitle();
-
-    Optional<Message<?>> getSubTitle();
-
-    Optional<Integer> getFadeIn();
-
-    Optional<Integer> getStay();
-
-    Optional<Integer> getFadeOut();
-
-    boolean isClear();
-
-    boolean isReset();
-
-    TitleBuilder builder();
-
-    void send(Player... players);
+interface TranslationFactory {
+    Translation getTranslation(String id);
 }

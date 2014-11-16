@@ -24,27 +24,16 @@
  */
 package org.spongepowered.api.text.title;
 
-import com.google.common.base.Optional;
-import org.spongepowered.api.entity.Player;
-import org.spongepowered.api.text.message.Message;
+public final class Titles {
+    private static final TitleFactory factory = new NullTitleFactory();
 
-public interface Title {
+    private Titles() {}
 
-    Optional<Message<?>> getTitle();
+    public static TitleBuilder builder() {
+        return update().reset();
+    }
 
-    Optional<Message<?>> getSubTitle();
-
-    Optional<Integer> getFadeIn();
-
-    Optional<Integer> getStay();
-
-    Optional<Integer> getFadeOut();
-
-    boolean isClear();
-
-    boolean isReset();
-
-    TitleBuilder builder();
-
-    void send(Player... players);
+    public static TitleBuilder update() {
+        return factory.createTitleBuilder();
+    }
 }

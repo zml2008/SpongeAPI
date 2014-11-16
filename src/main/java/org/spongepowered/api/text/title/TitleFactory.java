@@ -24,27 +24,7 @@
  */
 package org.spongepowered.api.text.title;
 
-import com.google.common.base.Optional;
-import org.spongepowered.api.entity.Player;
-import org.spongepowered.api.text.message.Message;
+interface TitleFactory {
 
-public interface Title {
-
-    Optional<Message<?>> getTitle();
-
-    Optional<Message<?>> getSubTitle();
-
-    Optional<Integer> getFadeIn();
-
-    Optional<Integer> getStay();
-
-    Optional<Integer> getFadeOut();
-
-    boolean isClear();
-
-    boolean isReset();
-
-    TitleBuilder builder();
-
-    void send(Player... players);
+    TitleBuilder createTitleBuilder();
 }

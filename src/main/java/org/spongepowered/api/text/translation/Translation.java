@@ -24,8 +24,6 @@
  */
 package org.spongepowered.api.text.translation;
 
-import com.google.common.base.Optional;
-
 /**
  * A Translation most closely represents any given Minecraft translation ID.
  * It allows for getting a string of text in multiple locales in the client; however, it is mostly used to hold a

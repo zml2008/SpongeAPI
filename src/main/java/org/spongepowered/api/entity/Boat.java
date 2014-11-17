@@ -72,4 +72,32 @@ public interface Boat extends Entity {
      * @param moveOnLand If the boat can move on land.
      */
     void setMoveOnLand(boolean moveOnLand);
+
+    /**
+     * Gets the rate at which occupied boats decelerate.
+     *
+     * @return The occupied deceleration rate.
+     */
+    double getOccupiedDeceleration();
+
+    /**
+     * Sets the rate at which occupied boats decelerate.
+     *
+     * @param occupiedDeceleration The new occupied deceleration rate.
+     */
+    void setOccupiedDeceleration(double occupiedDeceleration);
+
+    /**
+     * Gets the rate at which unoccupied boats decelerate.
+     *
+     * @return The unoccupied deceleration rate.
+     */
+    double getUnoccupiedDeceleration();
+
+    /**
+     * Sets the rate at which unoccupied boats decelerate.
+     *
+     * @param unoccupiedDeceleration The new unoccupied deceleration rate.
+     */
+    void setUnoccupiedDeceleration(double unoccupiedDeceleration);
 }

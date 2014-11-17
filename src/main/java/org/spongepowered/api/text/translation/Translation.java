@@ -42,13 +42,21 @@ public interface Translation {
     String getId();
 
     /**
-     * Gets the translation for this message, if it does not have any parameters.
+     * Gets the default translation without any parameters. If the translations contains
+     * any parameters they will be filled with empty text.
      *
      * @return A String for the translation
      */
     String get();
 
+    /**
+     * Gets the default translation with the specified parameters.
+     *
+     * @param args The parameters for this translation
+     * @return The default translation with the specified parameters
+     */
     String get(Object... args);
+
     // TODO locale api
     //String get(Object locale);
     //String get(Object locale, Object... args);

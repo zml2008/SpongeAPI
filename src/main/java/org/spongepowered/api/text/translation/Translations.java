@@ -24,6 +24,11 @@
  */
 package org.spongepowered.api.text.translation;
 
+import com.google.common.base.Optional;
+
+/**
+ * Utility class to obtain instances of {@link Translation}s by their ID.
+ */
 public final class Translations {
     private static final TranslationFactory factory = new NullTranslationFactory();
 
@@ -31,7 +36,13 @@ public final class Translations {
 
     }
 
-    public static Translation of(String id) {
-        return factory.getTranslation(id);
+    /**
+     * Returns a {@link Translation} instance for the translation with the specified ID.
+     *
+     * @param id The translation ID
+     * @return A {@link Translation} instance of the translation with the specified ID
+     */
+    public static Optional<Translation> of(String id) {
+        return Optional.fromNullable(factory.getTranslation(id));
     }
 }

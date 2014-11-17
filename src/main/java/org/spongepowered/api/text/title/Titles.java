@@ -24,15 +24,35 @@
  */
 package org.spongepowered.api.text.title;
 
+/**
+ * Utility class to create instances of {@link TitleBuilder}.
+ */
 public final class Titles {
     private static final TitleFactory factory = new NullTitleFactory();
 
     private Titles() {}
 
+    /**
+     * Creates a new {@link Title} configuration builder that will reset the
+     * currently displayed Title on the client before displaying the new
+     * configured one.
+     *
+     * @return A new {@link TitleBuilder}
+     * @see #update
+     */
     public static TitleBuilder builder() {
         return update().reset();
     }
 
+    /**
+     * Creates a new empty {@link Title} configuration builder. Unlike
+     * {@link #builder} this won't reset the current Title on the client
+     * before displaying the current one. This has less use cases but should
+     * be used if just the previously sent Title should be updated.
+     *
+     * @return A new {@link TitleBuilder}
+     * @see #builder
+     */
     public static TitleBuilder update() {
         return factory.createTitleBuilder();
     }

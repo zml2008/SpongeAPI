@@ -24,6 +24,8 @@
  */
 package org.spongepowered.api.entity;
 
+import org.spongepowered.api.math.Vector3d;
+
 /**
  * Represents a Minecart entity.
  */
@@ -56,4 +58,52 @@ public interface Minecart extends Entity {
      * @param maxSpeed The new max speed.
      */
     void setMaxSpeed(double maxSpeed);
+
+    /**
+     * Gets whether or not the minecart slows down
+     * faster without a passenger.
+     *
+     * @return If the cart slows when empty.
+     */
+    boolean doesSlowWhenEmpty();
+
+    /**
+     * Sets whether or not the minecart slows down
+     * faster without a passenger.
+     *
+     * @param slowWhenEmpty If the cart should slow when emoty.
+     */
+    void setSlowWhenEmpty(boolean slowWhenEmpty);
+
+    /**
+     * Gets the velocity modifier applied when the
+     * minecart is airborne.
+     *
+     * @return Airborne velocity modifier.
+     */
+    Vector3d getAirborneVelocityMod();
+
+    /**
+     * Sets the velocity modifier applied when the
+     * minecart is airborne.
+     *
+     * @param airborneVelocityMod The new airborne velocity modifier.
+     */
+    void setAirborneVelocityMod(Vector3d airborneVelocityMod);
+
+    /**
+     * Gets the velocity modifier applied when the
+     * minecart is not on rails.
+     *
+     * @return Derailed velocity modifier.
+     */
+    Vector3d getDerailedVelocityMod();
+
+    /**
+     * Sets the velocity modifier applied when the
+     * minecart is not on rails.
+     *
+     * @param derailedVelocityMod The new derailed velocity modifier.
+     */
+    void setDerailedVelocityMod(Vector3d derailedVelocityMod);
 }

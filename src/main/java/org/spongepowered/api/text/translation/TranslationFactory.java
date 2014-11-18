@@ -24,6 +24,16 @@
  */
 package org.spongepowered.api.text.translation;
 
+/**
+ * Represents the required implementation for the static methods in {@link Translations}.
+ */
 interface TranslationFactory {
+
+    /**
+     * Returns a {@link Translation} instance for the translation with the specified ID.
+     *
+     * @param id The translation ID
+     * @return A {@link Translation} instance with the specified ID or null if not found
+     */
     Translation getTranslation(String id);
 }

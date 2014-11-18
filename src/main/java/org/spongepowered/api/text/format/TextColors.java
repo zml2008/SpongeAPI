@@ -25,6 +25,7 @@
 package org.spongepowered.api.text.format;
 
 import com.google.common.base.Optional;
+import org.spongepowered.api.text.chat.ChatPosition;
 
 import java.util.List;
 
@@ -54,16 +55,32 @@ public final class TextColors {
     public static final TextColor.Base YELLOW = null;
     public static final TextColor.Base WHITE = null;
 
+    /**
+     * Resets the current color to the default one on the client. In most cases
+     * this will be the same as {@link #WHITE}.
+     */
+    public static final TextColor.Base RESET = null;
+
+
+    /**
+     * Gets the {@link TextColor} with the specified name.
+     *
+     * @param name The identifier of the text colors, for example "DARK_BLUE"
+     * @return The {@link TextColor} with the specified name, or {@link Optional#absent()} if not found
+     */
     public static Optional<TextColor> valueOf(String name) {
         return Optional.fromNullable(TextStyles.factory.parseColor(name));
     }
 
+    /**
+     * Returns a list of all available {@link TextColor}s on this server.
+     *
+     * @return An immutable list of all text colors
+     */
     public static List<TextColor> getValues() {
         return TextStyles.factory.getColors();
     }
 
-    // TODO: There doesn't seem to be a difference to WHITE
-    // Unlike with the old color codes, this will not reset the chat style, just the color
-    public static final TextColor.Base RESET = null;
+
 
 }

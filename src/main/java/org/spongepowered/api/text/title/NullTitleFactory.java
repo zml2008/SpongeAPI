@@ -24,6 +24,9 @@
  */
 package org.spongepowered.api.text.title;
 
+/**
+ * Dummy implementation of {@link TitleFactory} - returns null for all methods
+ */
 class NullTitleFactory implements TitleFactory {
 
     @Override

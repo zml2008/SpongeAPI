@@ -45,16 +45,38 @@ public final class TextStyles {
     public static final TextStyle.Base UNDERLINE = null;
     public static final TextStyle.Base ITALIC = null;
 
+    /**
+     * Resets all currently applied text styles to their default values.
+     */
     public static final TextStyle.Base RESET = null;
 
+    /**
+     * Gets the {@link TextStyle} with the specified name.
+     *
+     * @param name The identifier of the text style, for example "UNDERLINE"
+     * @return The {@link TextStyle} with the specified name, or {@link Optional#absent()} if not found
+     */
     public static Optional<TextStyle> valueOf(String name) {
         return Optional.fromNullable(factory.parseStyle(name));
     }
 
+    /**
+     * Returns a list of all available {@link TextStyle}s on this server.
+     *
+     * @return An immutable list of all text styles
+     */
     public static List<TextStyle> getValues() {
         return factory.getStyles();
     }
 
+    /**
+     * Constructs a composite text style from the specified styles. This will result
+     * in the same as calling {@link TextStyle#and(TextStyle...)} on all of the text
+     * styles.
+     *
+     * @param styles The styles to combine.
+     * @return A composite text style from the specified styles
+     */
     public static TextStyle of(TextStyle... styles) {
         return factory.createStyle(styles);
     }

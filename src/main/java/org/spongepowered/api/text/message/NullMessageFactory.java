@@ -26,6 +26,9 @@ package org.spongepowered.api.text.message;
 
 import org.spongepowered.api.text.translation.Translation;
 
+/**
+ * Dummy implementation of {@link MessageFactory} - returns null for all methods
+ */
 class NullMessageFactory implements MessageFactory {
 
     @Override
@@ -49,17 +52,17 @@ class NullMessageFactory implements MessageFactory {
     }
 
     @Override
-    public Message.Text parseCodes(String message, char color) {
+    public Message.Text parseLegacyMessage(String message, char color) {
         return null;
     }
 
     @Override
-    public String stripCodes(String message, char color) {
+    public String stripLegacyCodes(String message, char color) {
         return null;
     }
 
     @Override
-    public String replaceCodes(String message, char from, char to) {
+    public String replaceLegacyCodes(String message, char from, char to) {
         return null;
     }
 

@@ -57,10 +57,21 @@ public final class ChatPositions {
      */
     public static final ChatPosition ACTION_BAR = null;
 
+    /**
+     * Gets the {@link ChatPosition} with the specified name.
+     *
+     * @param name The identifier of the chat position, for example "ACTION_BAR"
+     * @return The {@link ChatPosition} with the specified name, or {@link Optional#absent()} if not found
+     */
     public static Optional<ChatPosition> valueOf(String name) {
         return Optional.fromNullable(factory.parsePosition(name));
     }
 
+    /**
+     * Returns a list of all available {@link ChatPosition}s on this server.
+     *
+     * @return An immutable list of all chat positions
+     */
     public static List<ChatPosition> getValues() {
         return factory.getPositions();
     }

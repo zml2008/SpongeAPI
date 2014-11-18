@@ -24,7 +24,15 @@
  */
 package org.spongepowered.api.text.title;
 
+/**
+ * Represents the required implementation for the static methods in {@link Titles}.
+ */
 interface TitleFactory {
 
+    /**
+     * Creates a new empty {@link TitleBuilder} instance.
+     *
+     * @return A new title builder
+     */
     TitleBuilder createTitleBuilder();
 }

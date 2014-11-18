@@ -99,4 +99,34 @@ public interface ItemStack extends Comparable<ItemStack>, Serializable {
      * @return Map of enchantments to current levels
      */
     Map<Enchantment, Integer> getEnchantments();
+
+    /**
+     * Test if this stack has enchantments.
+     *
+     * @return Whether this stack is enchanted
+     */
+    boolean isEnchanted();
+
+    /**
+     * Set an enchantment to the given level, adding it if necessary.
+     *
+     * @param enchant Enchantment to set the level of
+     * @param level Level to set the enchantment at
+     */
+    void setEnchantment(Enchantment enchant, int level);
+
+    /**
+     * Remove an enchantment from this stack.
+     *
+     * @param enchant Enchantment to remove
+     */
+    void removeEnchantment(Enchantment enchant);
+
+    /**
+     * Get the level of an enchantment on this stack.
+     *
+     * @param enchant The enchantment to get the level of
+     * @return The level of the enchantment, or -1 if the enchantment is not applied to this stack
+     */
+    int getEnchantment(Enchantment enchant);
 }

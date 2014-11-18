@@ -25,7 +25,6 @@
 package org.spongepowered.api.text.format;
 
 import com.google.common.base.Optional;
-import org.spongepowered.api.text.chat.ChatPosition;
 
 import java.util.List;
 
@@ -69,7 +68,7 @@ public final class TextColors {
      *         {@link Optional#absent()} if not found
      */
     public static Optional<TextColor> valueOf(String name) {
-        return Optional.fromNullable(TextStyles.factory.parseColor(name));
+        return Optional.fromNullable(TextStyles.factory.getColorFromName(name));
     }
 
     /**

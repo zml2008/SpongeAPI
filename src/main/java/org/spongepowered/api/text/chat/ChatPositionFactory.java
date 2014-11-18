@@ -39,7 +39,7 @@ interface ChatPositionFactory {
      * @return The {@link ChatPosition} with the specified name, or null if not
      *         found
      */
-    ChatPosition parsePosition(String name);
+    ChatPosition getPositionFromName(String name);
 
     /**
      * Returns a list of all available {@link ChatPosition}s on this server.

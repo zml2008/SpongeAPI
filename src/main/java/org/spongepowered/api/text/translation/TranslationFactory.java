@@ -39,6 +39,6 @@ interface TranslationFactory {
      *         not found
      *
      */
-    Translation getTranslation(String id);
+    Translation getTranslationFromId(String id);
 
 }

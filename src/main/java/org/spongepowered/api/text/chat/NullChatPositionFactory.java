@@ -33,7 +33,7 @@ import java.util.List;
 class NullChatPositionFactory implements ChatPositionFactory {
 
     @Override
-    public ChatPosition parsePosition(String name) {
+    public ChatPosition getPositionFromName(String name) {
         return null;
     }
 

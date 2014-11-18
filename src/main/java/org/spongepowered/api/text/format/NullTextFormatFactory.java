@@ -33,7 +33,7 @@ import java.util.List;
 class NullTextFormatFactory implements TextFormatFactory {
 
     @Override
-    public TextColor parseColor(String name) {
+    public TextColor getColorFromName(String name) {
         return null;
     }
 
@@ -43,7 +43,7 @@ class NullTextFormatFactory implements TextFormatFactory {
     }
 
     @Override
-    public TextStyle parseStyle(String name) {
+    public TextStyle getStyleFromName(String name) {
         return null;
     }
 

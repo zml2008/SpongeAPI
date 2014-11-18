@@ -39,7 +39,7 @@ interface TextFormatFactory {
      * @return The {@link TextColor} with the specified name, or null if not
      *         found
      */
-    TextColor parseColor(String name);
+    TextColor getColorFromName(String name);
 
     /**
      * Returns a list of all available {@link TextColor}s on this server.
@@ -55,7 +55,7 @@ interface TextFormatFactory {
      * @return The {@link TextStyle} with the specified name, or null if not
      *         found
      */
-    TextStyle parseStyle(String name);
+    TextStyle getStyleFromName(String name);
 
     /**
      * Returns a list of all available {@link TextStyle}s on this server.

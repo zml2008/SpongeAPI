@@ -70,7 +70,7 @@ public final class ChatPositions {
      *         {@link Optional#absent()} if not found
      */
     public static Optional<ChatPosition> valueOf(String name) {
-        return Optional.fromNullable(factory.parsePosition(name));
+        return Optional.fromNullable(factory.getPositionFromName(name));
     }
 
     /**

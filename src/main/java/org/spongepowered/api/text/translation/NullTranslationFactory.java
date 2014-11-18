@@ -31,8 +31,7 @@ package org.spongepowered.api.text.translation;
 class NullTranslationFactory implements TranslationFactory {
 
     @Override
-    public Translation getTranslation(String id) {
+    public Translation getTranslationFromId(String id) {
         return null;
     }
-
 }

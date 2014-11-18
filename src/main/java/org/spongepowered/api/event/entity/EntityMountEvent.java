@@ -33,9 +33,9 @@ import org.spongepowered.api.event.Cancellable;
 public interface EntityMountEvent extends EntityEvent, Cancellable {
 
     /**
-     * Gets the entity that was mounted.
+     * Gets the entity that is being mounted.
      *
-     * @return The entity that was mounted.
+     * @return The entity that is being mounted.
      */
     Entity getMounted();
 }

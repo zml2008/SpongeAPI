@@ -28,7 +28,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Represents the required implementation for the static methods in {@link Locales}.
+ * Represents the required implementation for the static methods in
+ * {@link Locales}.
  */
 interface LocaleFactory {
 

@@ -55,6 +55,7 @@ interface MessageFactory {
     MessageBuilder<Translation> createTranslationBuilder(Translation translation, Object[] args);
 
     // TODO: Score API
+
     /**
      * Creates a new {@link MessageBuilder} that builds {@link Message.Score}
      * messages.
@@ -64,6 +65,7 @@ interface MessageFactory {
      * @return A
      */
     MessageBuilder<Object> createScoreBuilder(Object score, String override);
+
     /**
      * Returns the default legacy formatting character.
      *

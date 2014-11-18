@@ -33,6 +33,7 @@ import java.util.Locale;
  * Utility class for working with languages/locales in Minecraft
  */
 public final class Locales {
+
     private static final LocaleFactory factory = new NullLocaleFactory();
 
     private Locales() {
@@ -118,7 +119,8 @@ public final class Locales {
      * Gets the {@link Locale} of the specified Minecraft locale code.
      *
      * @param id The ID for the locale, for example "en_US" or "de_DE"
-     * @return The {@link Locale} with the specified ID, or {@link Optional#absent} if not found
+     * @return The {@link Locale} with the specified ID, or
+     *         {@link Optional#absent} if not found
      */
     public static Optional<Locale> of(String id) {
         return Optional.fromNullable(factory.getLocaleFromId(id));
@@ -128,7 +130,8 @@ public final class Locales {
      * Gets the {@link Locale} with the specified name.
      *
      * @param name The name of the locale, for example "ENGLISH" or "GERMAN"
-     * @return The {@link Locale} with the specified name, or {@link Optional#absent()} if not found
+     * @return The {@link Locale} with the specified name, or
+     *         {@link Optional#absent()} if not found
      */
     public static Optional<Locale> valueOf(String name) {
         return Optional.fromNullable(factory.getLocaleFromName(name));

@@ -29,8 +29,8 @@ import com.google.common.base.Optional;
 import java.util.List;
 
 /**
- * TextStyles is a list of the default text styles that Minecraft provides.
- * The values are filled in by mixins in Sponge at runtime.
+ * TextStyles is a list of the default text styles that Minecraft provides. The
+ * values are filled in by mixins in Sponge at runtime.
  */
 public final class TextStyles {
 
@@ -54,7 +54,8 @@ public final class TextStyles {
      * Gets the {@link TextStyle} with the specified name.
      *
      * @param name The identifier of the text style, for example "UNDERLINE"
-     * @return The {@link TextStyle} with the specified name, or {@link Optional#absent()} if not found
+     * @return The {@link TextStyle} with the specified name, or
+     *         {@link Optional#absent()} if not found
      */
     public static Optional<TextStyle> valueOf(String name) {
         return Optional.fromNullable(factory.parseStyle(name));
@@ -70,9 +71,9 @@ public final class TextStyles {
     }
 
     /**
-     * Constructs a composite text style from the specified styles. This will result
-     * in the same as calling {@link TextStyle#and(TextStyle...)} on all of the text
-     * styles.
+     * Constructs a composite text style from the specified styles. This will
+     * result in the same as calling {@link TextStyle#and(TextStyle...)} on all
+     * of the text styles.
      *
      * @param styles The styles to combine.
      * @return A composite text style from the specified styles

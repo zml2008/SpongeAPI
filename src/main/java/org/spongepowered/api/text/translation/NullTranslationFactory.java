@@ -25,7 +25,8 @@
 package org.spongepowered.api.text.translation;
 
 /**
- * Dummy implementation of {@link TranslationFactory} - returns null for all methods.
+ * Dummy implementation of {@link TranslationFactory} - returns null for all
+ * methods.
  */
 class NullTranslationFactory implements TranslationFactory {
 

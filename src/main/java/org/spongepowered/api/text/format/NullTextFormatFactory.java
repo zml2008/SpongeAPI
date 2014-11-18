@@ -27,7 +27,8 @@ package org.spongepowered.api.text.format;
 import java.util.List;
 
 /**
- * Dummy implementation of {@link TextFormatFactory} - returns null for all methods.
+ * Dummy implementation of {@link TextFormatFactory} - returns null for all
+ * methods.
  */
 class NullTextFormatFactory implements TextFormatFactory {
 

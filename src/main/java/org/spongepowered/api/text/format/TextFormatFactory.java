@@ -36,7 +36,8 @@ interface TextFormatFactory {
      * Gets the {@link TextColor} with the specified name.
      *
      * @param name The identifier of the text colors, for example "DARK_BLUE"
-     * @return The {@link TextColor} with the specified name, or null if not found
+     * @return The {@link TextColor} with the specified name, or null if not
+     *         found
      */
     TextColor parseColor(String name);
 
@@ -51,7 +52,8 @@ interface TextFormatFactory {
      * Gets the {@link TextStyle} with the specified name.
      *
      * @param name The identifier of the text style, for example "UNDERLINE"
-     * @return The {@link TextStyle} with the specified name, or null if not found
+     * @return The {@link TextStyle} with the specified name, or null if not
+     *         found
      */
     TextStyle parseStyle(String name);
 
@@ -63,9 +65,9 @@ interface TextFormatFactory {
     List<TextStyle> getStyles();
 
     /**
-     * Constructs a composite text style from the specified styles. This should result
-     * in the same as calling {@link TextStyle#and(TextStyle...)} on all of the text
-     * styles.
+     * Constructs a composite text style from the specified styles. This should
+     * result in the same as calling {@link TextStyle#and(TextStyle...)} on all
+     * of the text styles.
      *
      * @param styles The styles to combine.
      * @return A composite text style from the specified styles

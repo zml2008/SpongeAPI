@@ -96,26 +96,4 @@ public interface Enchantment {
      * @return Whether these enchantments are compatible
      */
     boolean isCompatibleWith(Enchantment ench);
-
-    /**
-     * Get the type of items that this enchantment applies to.
-     *
-     * @return Target item type
-     */
-    Target getTargetItems();
-
-    // TODO: Does it make any sense to try to abstract this more?
-    public enum Target {
-        ANY,
-        ARMOR_ANY,
-        ARMOR_BOOTS,
-        ARMOR_LEGGINGS,
-        ARMOR_CHEST,
-        ARMOR_HELMET,
-        WEAPON,
-        MINING_TOOL,
-        FISHING_ROD,
-        BREAKABLE,
-        BOW;
-    }
 }

@@ -198,7 +198,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public Map<Set<Context>, List<SubjectReference>> getAllParents() {
+    public Map<Set<Context>, List<? extends SubjectReference>> getAllParents() {
         return ImmutableMap.copyOf(this.parents);
     }
 
@@ -208,7 +208,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> setParents(Set<Context> contexts, List<SubjectReference> parents, TransferMethod method) {
+    public CompletableFuture<Boolean> setParents(Set<Context> contexts, List<? extends SubjectReference> parents, TransferMethod method) {
         contexts = ImmutableSet.copyOf(checkNotNull(contexts, "contexts"));
         checkNotNull(method, "method");
 
@@ -417,7 +417,7 @@ public class MemorySubjectData implements SubjectData {
         checkNotNull(method, "method");
         Map<Set<Context>, Map<String, Boolean>> otherPerms = other.getAllPermissions();
         Map<Set<Context>, Map<String, String>> otherOptions = other.getAllOptions();
-        Map<Set<Context>, List<SubjectReference>> otherParents = other.getAllParents();
+        Map<Set<Context>, List<? extends SubjectReference>> otherParents = other.getAllParents();
 
         if (method == TransferMethod.OVERWRITE) {
             this.permissions.clear();

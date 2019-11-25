@@ -157,7 +157,7 @@ public interface PermissionDescription {
      *         set, and the value this permission is set to
      * @see SubjectCollection#getAllWithPermission(String)
      */
-    CompletableFuture<Map<SubjectReference, Boolean>> findAssignedSubjects(String collectionIdentifier);
+    CompletableFuture<Map<? extends SubjectReference, Boolean>> findAssignedSubjects(String collectionIdentifier);
 
     /**
      * Gets all loaded subjects that have this permission set in the given
@@ -177,7 +177,7 @@ public interface PermissionDescription {
      * @return An immutable map of subjects that have this permission set
      * @see SubjectCollection#getLoadedWithPermission(String)
      */
-    Map<Subject, Boolean> getAssignedSubjects(String collectionIdentifier);
+    Map<? extends Subject, Boolean> getAssignedSubjects(String collectionIdentifier);
 
     /**
      * A builder for permission descriptions.

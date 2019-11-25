@@ -180,7 +180,7 @@ public interface PermissionService extends ContextualService<Subject> {
      *                                  pass the validity predicate for this
      *                                  service
      */
-    CompletableFuture<SubjectCollection> loadCollection(String identifier);
+    CompletableFuture<? extends SubjectCollection> loadCollection(String identifier);
 
     /**
      * Returns a subject collection with the given identifier, if the
@@ -198,7 +198,7 @@ public interface PermissionService extends ContextualService<Subject> {
      * @param identifier The identifier
      * @return A subject collection for the given identifier
      */
-    Optional<SubjectCollection> getCollection(String identifier);
+    Optional<? extends SubjectCollection> getCollection(String identifier);
 
     /**
      * Returns whether a subject collection with the given identifier currently
@@ -211,11 +211,11 @@ public interface PermissionService extends ContextualService<Subject> {
 
     /**
      * Returns an immutable copy of all currently loaded subject collections
-     * held by this permission service.
+     * held by this permission service. This map is immutable.
      *
      * @return The loaded collections for this service
      */
-    Map<String, SubjectCollection> getLoadedCollections();
+    Map<String, ? extends SubjectCollection> getLoadedCollections();
 
     /**
      * Returns a set of the subject collection identifiers known to this
@@ -223,7 +223,7 @@ public interface PermissionService extends ContextualService<Subject> {
      *
      * @return A set of collection identifiers
      */
-    CompletableFuture<Set<String>> getAllIdentifiers();
+    CompletableFuture<? extends Set<String>> getAllIdentifiers();
 
     /**
      * Creates a new subject reference to represent the expressed subject.
@@ -266,7 +266,7 @@ public interface PermissionService extends ContextualService<Subject> {
      * @return The description for the given permission or
      *         {@link Optional#empty()}
      */
-    Optional<PermissionDescription> getDescription(String permission);
+    Optional<? extends PermissionDescription> getDescription(String permission);
 
     /**
      * Gets a immutable collection containing all registered or generated
@@ -279,6 +279,6 @@ public interface PermissionService extends ContextualService<Subject> {
      * @return An immutable collection contain all registered or generated
      *         descriptions
      */
-    Collection<PermissionDescription> getDescriptions();
+    Collection<? extends PermissionDescription> getDescriptions();
 
 }

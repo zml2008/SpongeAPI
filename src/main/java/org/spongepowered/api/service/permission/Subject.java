@@ -234,7 +234,7 @@ public interface Subject extends Contextual {
      *
      * @return An immutable list of parents
      */
-    default List<SubjectReference> getParents() {
+    default List<? extends SubjectReference> getParents() {
         return this.getParents(this.getActiveContexts());
     }
 
@@ -247,7 +247,7 @@ public interface Subject extends Contextual {
      * @param contexts The context combination to check in
      * @return An immutable list of parents
      */
-    List<SubjectReference> getParents(Set<Context> contexts);
+    List<? extends SubjectReference> getParents(Set<Context> contexts);
 
     /**
      * Gets the value of a given option in the given context.

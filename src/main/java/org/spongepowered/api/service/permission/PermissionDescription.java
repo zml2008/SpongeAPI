@@ -26,6 +26,7 @@ package org.spongepowered.api.service.permission;
 
 import net.kyori.adventure.text.Component;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.spongepowered.api.ResourceKey;
 import org.spongepowered.plugin.PluginContainer;
 import org.spongepowered.api.util.Tristate;
 
@@ -39,8 +40,7 @@ import java.util.concurrent.CompletableFuture;
  * <p>The description is meant to provide human readable descriptions and meta
  * data for a permission.</p>
  *
- * <p>Descriptions <strong>DO NOT</strong> have any impact on permission check,
- * and are only provided and registered for an informational purpose.</p>
+ * Descriptions are primarily informational, but some default value information may be provided here.
  *
  * <p>Instances can be built using
  * {@link PermissionService#newDescriptionBuilder(PluginContainer)}.</p>
@@ -80,9 +80,8 @@ public interface PermissionDescription {
      * <ul>
      * <li>CHARACTER  = "A" - "Z" | "a" - "z" | "0" - "9" | "_" | "-"</li>
      * <li>NAME       = CHARACTER , { CHARACTER }</li>
-     * <li>TEMPLATE   = "&lt;" , NAME , "&gt;"</li>
-     * <li>PART       = NAME | TEMPLATE</li>
-     * <li>PERMISSION = NAME , { "." , PART }</li>
+     * <li>TEMPLATE   = "&lt" , NAME , "&gt"</li>
+     * <li>PERMISSION = NAME , { "." , NAME }, {".", TEMPLATE}</li>
      * </ul>
      *
      * <p>The following examples shall help you to structure your permissions
@@ -108,12 +107,13 @@ public interface PermissionDescription {
      * So if you want to allow someone to give themself only DIAMONDs, you would
      * assign them the following permissions:
      * <ul>
-     * <li>"myPlugin.give.execute"</li>
-     * <li>"myPlugin.give.type.DIAMOND"</li>
+     * <li>"myplugin.give.execute"</li>
+     * <li>"myplugin.give.type.minecraft.diamond"</li>
      * </ul>
      *
-     * <p><b>Note:</b> Permission ids are case insensitive! Permission ids
-     * should start with the owning plugin's id.</p>
+     * <p><b>Note:</b> Permission ids are case insensitive!
+     * If permission ids do not start with the plugin ID, implementations will prepend
+     * the plugin ID (so {@code command.give} will turn into {@code myplugin.command.give}<)/p>
      *
      * @return The permission id
      */
@@ -144,7 +144,8 @@ public interface PermissionDescription {
     Optional<PluginContainer> getOwner();
 
     /**
-     * Gets the default value this permission should have on this server
+     * Gets the default value this permission should have on this server.
+     * This value will have been applied to the default subject.
      *
      * @return The default value for this permission.
      */
@@ -188,6 +189,45 @@ public interface PermissionDescription {
     Map<? extends Subject, Boolean> getAssignedSubjects(String collectionIdentifier);
 
     /**
+     * Check if the given subject has the permission described, without any template parameters.
+     * If {@link #getId()} contains any template parameters, they will be stripped out -- See overloads if parameters are desired
+     *
+     * @param subj The subject to query
+     * @return Whether the given subject has this permission.
+     */
+    boolean query(Subject subj);
+
+    /**
+     * Check if the given subject has the permission described. Template parameters will be trimmed,
+     * and the catalog key will be appended in the format {@link ResourceKey#getNamespace()}.{@link ResourceKey#getValue()}.
+     *
+     * @param subj The subject to query
+     * @param key The catalog key to relativize this permission for
+     * @return Whether the given subject has this permission.
+     */
+    boolean query(Subject subj, ResourceKey key);
+
+    /**
+     * Check if the given subject has the permission described. Template parameters will be trimmed from the permission,
+     * and the given parameters will be appended joined by {@code .}.
+     *
+     * @param subj The subject to query
+     * @param parameters The parameters to append to the permission being checked
+     * @return Whether the given subject has this permission.
+     */
+    boolean query(Subject subj, String... parameters);
+
+    /**
+     * Check if the given subject has the permission described. Template parameters will be trimmed from the permission,
+     * and the given parameter will be appended
+     *
+     * @param subj The subject to query
+     * @param parameter The parameter to append to the permission when checking
+     * @return Whether the given subject has this permission.
+     */
+    boolean query(Subject subj, String parameter);
+
+    /**
      * A builder for permission descriptions.
      */
     interface Builder {
@@ -224,8 +264,7 @@ public interface PermissionDescription {
          * {@code  &lt;plugin id>:&lt;role>}. Implementations must provide an un-namespaced role template
          * that inherits its permissions from every plugin-namespaced role template.</p>
          *
-         * <p>If the given subject does not exist it will be created. Permission
-         * templates should not be assigned to regular subjects.</p>
+         * <p>If the given subject does not exist it will be created.</p>
          *
          * <p>It is recommended to use the standard role suggestions expressed
          * as static parameters in {@link PermissionDescription}.</p>
@@ -249,6 +288,10 @@ public interface PermissionDescription {
          * Sets a value that this permission should have by default.
          * This can be used to exclude permissions from node tree inheritance,
          * or to provide a permission to users by default.
+         *
+         * <p>This is shorthand for giving {@link #getId()} (with templates stripped) a value on the default
+         * subject, except that the default value will only be applied once
+         * {@link #register()} is called.</p>
          *
          * <p>Assigning default permissions should be used sparingly, and by
          * convention, only in situations where "default" game behaviour is restored

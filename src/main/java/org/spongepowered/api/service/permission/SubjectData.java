@@ -60,7 +60,7 @@ public interface SubjectData {
      * A convenience constant for the global context combination (the empty
      * set), if you want your code to look especially fancy.
      */
-    Set<Context> GLOBAL_CONTEXT = Collections.emptySet();
+    Set<Context<?, Subject>> GLOBAL_CONTEXT = Collections.emptySet();
 
     /**
      * Gets the {@link Subject} which holds this data.
@@ -83,7 +83,7 @@ public interface SubjectData {
      * @return An immutable copy of the mappings between contexts and lists of
      *         permissions containing every permission registered
      */
-    Map<Set<Context>, Map<String, Boolean>> getAllPermissions();
+    Map<Set<Context<?, Subject>>, Map<String, Boolean>> getAllPermissions();
 
     /**
      * Returns the list of permissions set for the given context.
@@ -94,7 +94,7 @@ public interface SubjectData {
      * @param contexts The particular context combination to check
      * @return Any permissions set
      */
-    Map<String, Boolean> getPermissions(Set<Context> contexts);
+    Map<String, Boolean> getPermissions(Set<Context<?, Subject>> contexts);
 
     /**
      * Sets a permission to a given value.
@@ -110,7 +110,7 @@ public interface SubjectData {
      * @param value The value to set this permission to
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> setPermission(Set<Context> contexts, String permission, Tristate value);
+    CompletableFuture<Boolean> setPermission(Set<Context<?, Subject>> contexts, String permission, Tristate value);
 
     /**
      * Sets all permissions in a given context combination.
@@ -126,7 +126,7 @@ public interface SubjectData {
      * @param method How to treat existing values in this subject
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> setPermissions(Set<Context> contexts, @Nullable Map<String, Boolean> permissions, TransferMethod method);
+    CompletableFuture<Boolean> setPermissions(Set<Context<?, Subject>> contexts, @Nullable Map<String, Boolean> permissions, TransferMethod method);
 
     /**
      * Get the permission value that will be returned if no more specific permission setting matches.
@@ -134,14 +134,14 @@ public interface SubjectData {
      * @param contexts The context combination to set this permission in.
      * @return The tristate
      */
-    Tristate getFallbackPermissionValue(Set<Context> contexts);
+    Tristate getFallbackPermissionValue(Set<Context<?, Subject>> contexts);
 
     /**
      * Get all fallback permission values set on this subject data
      *
      * @return An immutable map from context combination to fallback value
      */
-    Map<Set<Context>, Tristate> getAllFallbackPermissionValues();
+    Map<Set<Context<?, Subject>>, Tristate> getAllFallbackPermissionValues();
 
     /**
      * Set the permission value at the root of the node tree, that will be returned as a response
@@ -151,7 +151,7 @@ public interface SubjectData {
      * @param fallback The new fallback value. {@link Tristate#UNDEFINED} unsets the fallback value.
      * @return A future completing when the change has been applied
      */
-    CompletableFuture<Boolean> setFallbackPermissionValue(Set<Context> contexts, Tristate fallback);
+    CompletableFuture<Boolean> setFallbackPermissionValue(Set<Context<?, Subject>> contexts, Tristate fallback);
 
     /**
      * Clear all fallback permission values from this subject
@@ -175,7 +175,7 @@ public interface SubjectData {
      * @param contexts The context combination to clear permissions in
      * @return Whether any change occurred
      */
-    CompletableFuture<Boolean> clearPermissions(Set<Context> contexts);
+    CompletableFuture<Boolean> clearPermissions(Set<Context<?, Subject>> contexts);
 
     /**
      * Return all registered parent subjects for all contexts.
@@ -186,7 +186,7 @@ public interface SubjectData {
      *
      * @return All registered parents and the context they are registered in
      */
-    Map<Set<Context>, List<? extends SubjectReference>> getAllParents();
+    Map<Set<Context<?, Subject>>, List<? extends SubjectReference>> getAllParents();
 
     /**
      * Return all registered parent subjects for a given context.
@@ -198,7 +198,7 @@ public interface SubjectData {
      * @param contexts The context to check
      * @return names of parents valid in the given context
      */
-    List<? extends SubjectReference> getParents(Set<Context> contexts);
+    List<? extends SubjectReference> getParents(Set<Context<?, Subject>> contexts);
 
     /**
      * Sets the parents in a particular context combination.
@@ -210,7 +210,7 @@ public interface SubjectData {
      * @param parents A list of the parents this subject should have
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> setParents(Set<Context> contexts, List<? extends SubjectReference> parents, TransferMethod method);
+    CompletableFuture<Boolean> setParents(Set<Context<?, Subject>> contexts, List<? extends SubjectReference> parents, TransferMethod method);
 
     /**
      * Adds a parent in a particular context combination.
@@ -222,7 +222,7 @@ public interface SubjectData {
      * @param parent The name of the parent to add
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> addParent(Set<Context> contexts, SubjectReference parent);
+    CompletableFuture<Boolean> addParent(Set<Context<?, Subject>> contexts, SubjectReference parent);
 
     /**
      * Removes a parent in a particular context combination.
@@ -234,7 +234,7 @@ public interface SubjectData {
      * @param parent The name of the parent to remove
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> removeParent(Set<Context> contexts, SubjectReference parent);
+    CompletableFuture<Boolean> removeParent(Set<Context<?, Subject>> contexts, SubjectReference parent);
 
     /**
      * Remove all parents in any context combination.
@@ -252,14 +252,14 @@ public interface SubjectData {
      * @param contexts The context combination to clear the parents of
      * @return Whether any change occurred
      */
-    CompletableFuture<Boolean> clearParents(Set<Context> contexts);
+    CompletableFuture<Boolean> clearParents(Set<Context<?, Subject>> contexts);
 
     /**
      * Return all options for all context combinations currently registered.
      *
      * @return An immutable snapshot of all options data
      */
-    Map<Set<Context>, Map<String, String>> getAllOptions();
+    Map<Set<Context<?, Subject>>, Map<String, String>> getAllOptions();
 
     /**
      * Gets options for a specific context combination.
@@ -267,7 +267,7 @@ public interface SubjectData {
      * @param contexts The context combination to get options for
      * @return All available options, returning an empty map if none are present
      */
-    Map<String, String> getOptions(Set<Context> contexts);
+    Map<String, String> getOptions(Set<Context<?, Subject>> contexts);
 
     /**
      * Sets a specific option to a value.
@@ -279,7 +279,7 @@ public interface SubjectData {
      * @param value The value to set.
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> setOption(Set<Context> contexts, String key, @Nullable String value);
+    CompletableFuture<Boolean> setOption(Set<Context<?, Subject>> contexts, String key, @Nullable String value);
 
     /**
      * Sets all options in a particular context. This will first remove any existing options.
@@ -290,7 +290,7 @@ public interface SubjectData {
      * @param options The map of options to set
      * @return Whether the operation was successful
      */
-    CompletableFuture<Boolean> setOptions(Set<Context> contexts, @Nullable Map<String, String> options, TransferMethod method);
+    CompletableFuture<Boolean> setOptions(Set<Context<?, Subject>> contexts, @Nullable Map<String, String> options, TransferMethod method);
 
     /**
      * Clear all options.
@@ -308,7 +308,7 @@ public interface SubjectData {
      * @param contexts The context combination
      * @return Whether the operation was successful (any options were removed)
      */
-    CompletableFuture<Boolean> clearOptions(Set<Context> contexts);
+    CompletableFuture<Boolean> clearOptions(Set<Context<?, Subject>> contexts);
 
     /**
      * Copy all data from another subject data instance into this one, preserving the original subject.

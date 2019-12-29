@@ -70,22 +70,22 @@ public interface SubjectProxy extends Subject {
     }
 
     @Override
-    default Tristate getPermissionValue(final Set<Context> contexts, final String permission) {
+    default Tristate getPermissionValue(final Set<Context<?, Subject>> contexts, final String permission) {
         return this.getSubject().getPermissionValue(contexts, permission);
     }
 
     @Override
-    default boolean isChildOf(final Set<Context> contexts, final SubjectReference parent) {
+    default boolean isChildOf(final Set<Context<?, Subject>> contexts, final SubjectReference parent) {
         return this.getSubject().isChildOf(contexts, parent);
     }
 
     @Override
-    default List<SubjectReference> getParents(final Set<Context> contexts) {
+    default List<? extends SubjectReference> getParents(final Set<Context<?, Subject>> contexts) {
         return this.getSubject().getParents();
     }
 
     @Override
-    default Optional<String> getOption(final Set<Context> contexts, final String key) {
+    default Optional<String> getOption(final Set<Context<?, Subject>> contexts, final String key) {
         return this.getSubject().getOption(contexts, key);
     }
 
@@ -95,12 +95,12 @@ public interface SubjectProxy extends Subject {
     }
 
     @Override
-    default Set<Context> getActiveContexts() {
+    default Set<Context<?, Subject>> getActiveContexts() {
         return this.getSubject().getActiveContexts();
     }
 
     @Override
-    default boolean hasPermission(final Set<Context> contexts, final String permission) {
+    default boolean hasPermission(final Set<Context<?, Subject>> contexts, final String permission) {
         return this.getSubject().hasPermission(contexts, permission);
     }
 
@@ -115,7 +115,7 @@ public interface SubjectProxy extends Subject {
     }
 
     @Override
-    default List<SubjectReference> getParents() {
+    default List<? extends SubjectReference> getParents() {
         return this.getSubject().getParents();
     }
 

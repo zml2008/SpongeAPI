@@ -266,7 +266,7 @@ public interface SubjectCollection {
      * @return A reference to any subject known to have this permission
      *         set, and the value this permission is set to
      */
-    CompletableFuture<Map<? extends SubjectReference, Boolean>> getAllWithPermission(Set<Context> contexts, String permission);
+    CompletableFuture<Map<? extends SubjectReference, Boolean>> getAllWithPermission(Set<Context<?, Subject>> contexts, String permission);
 
     /**
      * Return all loaded subjects with the given permission set.
@@ -299,7 +299,7 @@ public interface SubjectCollection {
      * @return A map containing any subject known to have this permission set,
      *         and the value this permission is set to
      */
-    Map<? extends Subject, Boolean> getLoadedWithPermission(Set<Context> contexts, String permission);
+    Map<? extends Subject, Boolean> getLoadedWithPermission(Set<Context<?, Subject>> contexts, String permission);
 
     /**
      * Gets the subject holding data that is applied by default to all

@@ -55,9 +55,9 @@ import java.util.concurrent.ConcurrentMap;
 public class MemorySubjectData implements SubjectData {
 
     protected final Subject subject;
-    protected final ConcurrentMap<Set<Context>, Map<String, String>> options = Maps.newConcurrentMap();
-    protected final ConcurrentMap<Set<Context>, NodeTree> permissions = Maps.newConcurrentMap();
-    protected final ConcurrentMap<Set<Context>, List<SubjectReference>> parents = Maps.newConcurrentMap();
+    protected final ConcurrentMap<Set<Context<?, Subject>>, Map<String, String>> options = Maps.newConcurrentMap();
+    protected final ConcurrentMap<Set<Context<?, Subject>>, NodeTree> permissions = Maps.newConcurrentMap();
+    protected final ConcurrentMap<Set<Context<?, Subject>>, List<SubjectReference>> parents = Maps.newConcurrentMap();
 
     /**
      * Creates a new subject data instance, using the provided service to
@@ -88,9 +88,9 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public Map<Set<Context>, Map<String, Boolean>> getAllPermissions() {
-        ImmutableMap.Builder<Set<Context>, Map<String, Boolean>> ret = ImmutableMap.builder();
-        for (Map.Entry<Set<Context>, NodeTree> ent : this.permissions.entrySet()) {
+    public Map<Set<Context<?, Subject>>, Map<String, Boolean>> getAllPermissions() {
+        ImmutableMap.Builder<Set<Context<?, Subject>>, Map<String, Boolean>> ret = ImmutableMap.builder();
+        for (Map.Entry<Set<Context<?, Subject>>, NodeTree> ent : this.permissions.entrySet()) {
             ret.put(ent.getKey(), ent.getValue().asMap());
         }
         return ret.build();
@@ -104,19 +104,19 @@ public class MemorySubjectData implements SubjectData {
      * @param contexts The contexts to get a node tree for
      * @return The node tree
      */
-    public NodeTree getNodeTree(Set<Context> contexts) {
+    public NodeTree getNodeTree(Set<Context<?, Subject>> contexts) {
         NodeTree perms = this.permissions.get(checkNotNull(contexts, "contexts"));
         return perms == null ? NodeTree.of(ImmutableMap.of()) : perms;
     }
 
     @Override
-    public Map<String, Boolean> getPermissions(Set<Context> contexts) {
+    public Map<String, Boolean> getPermissions(Set<Context<?, Subject>> contexts) {
         NodeTree perms = this.permissions.get(checkNotNull(contexts, "contexts"));
         return perms == null ? ImmutableMap.of() : perms.asMap();
     }
 
     @Override
-    public CompletableFuture<Boolean> setPermission(Set<Context> contexts, String permission, Tristate value) {
+    public CompletableFuture<Boolean> setPermission(Set<Context<?, Subject>> contexts, String permission, Tristate value) {
         checkNotNull(contexts, "contexts");
         checkNotNull(permission, "permission");
         checkNotNull(value, "value");
@@ -142,7 +142,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> setPermissions(Set<Context> contexts, @Nullable Map<String, Boolean> permissions, TransferMethod method) {
+    public CompletableFuture<Boolean> setPermissions(Set<Context<?, Subject>> contexts, @Nullable Map<String, Boolean> permissions, TransferMethod method) {
         contexts = ImmutableSet.copyOf(checkNotNull(contexts, "contexts"));
         checkNotNull(method, "method");
 
@@ -179,23 +179,23 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public Tristate getFallbackPermissionValue(Set<Context> contexts) {
+    public Tristate getFallbackPermissionValue(Set<Context<?, Subject>> contexts) {
         NodeTree tree = this.permissions.get(checkNotNull(contexts, "contexts"));
         return tree == null ? Tristate.UNDEFINED : tree.getRootValue();
     }
 
     @Override
-    public Map<Set<Context>, Tristate> getAllFallbackPermissionValues() {
-        ImmutableMap.Builder<Set<Context>, Tristate> builder = ImmutableMap.builder();
+    public Map<Set<Context<?, Subject>>, Tristate> getAllFallbackPermissionValues() {
+        ImmutableMap.Builder<Set<Context<?, Subject>>, Tristate> builder = ImmutableMap.builder();
 
-        for (Map.Entry<Set<Context>, NodeTree> entry : this.permissions.entrySet()) {
+        for (Map.Entry<Set<Context<?, Subject>>, NodeTree> entry : this.permissions.entrySet()) {
             builder.put(entry.getKey(), entry.getValue().getRootValue());
         }
         return builder.build();
     }
 
     @Override
-    public CompletableFuture<Boolean> setFallbackPermissionValue(Set<Context> contexts, Tristate fallback) {
+    public CompletableFuture<Boolean> setFallbackPermissionValue(Set<Context<?, Subject>> contexts, Tristate fallback) {
         contexts = ImmutableSet.copyOf(checkNotNull(contexts, "contexts"));
         checkNotNull(fallback, "fallback");
 
@@ -222,7 +222,7 @@ public class MemorySubjectData implements SubjectData {
     @Override
     public CompletableFuture<Boolean> clearFallbackPermissionValues() {
         boolean anyUpdated = false;
-        for (Set<Context> key : this.permissions.keySet()) {
+        for (Set<Context<?, Subject>> key : this.permissions.keySet()) {
             while (true) {
                 NodeTree oldTree = this.permissions.get(key);
                 if (oldTree == null || oldTree.getRootValue() == Tristate.UNDEFINED) {
@@ -250,7 +250,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> clearPermissions(Set<Context> context) {
+    public CompletableFuture<Boolean> clearPermissions(Set<Context<?, Subject>> context) {
         boolean ret = this.permissions.remove(checkNotNull(context, "context")) != null;
         if (ret) {
             onUpdate();
@@ -259,17 +259,17 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public Map<Set<Context>, List<? extends SubjectReference>> getAllParents() {
+    public Map<Set<Context<?, Subject>>, List<? extends SubjectReference>> getAllParents() {
         return ImmutableMap.copyOf(this.parents);
     }
 
     @Override
-    public List<SubjectReference> getParents(Set<Context> contexts) {
+    public List<SubjectReference> getParents(Set<Context<?, Subject>> contexts) {
         return this.parents.getOrDefault(checkNotNull(contexts, "contexts"), ImmutableList.of());
     }
 
     @Override
-    public CompletableFuture<Boolean> setParents(Set<Context> contexts, List<? extends SubjectReference> parents, TransferMethod method) {
+    public CompletableFuture<Boolean> setParents(Set<Context<?, Subject>> contexts, List<? extends SubjectReference> parents, TransferMethod method) {
         contexts = ImmutableSet.copyOf(checkNotNull(contexts, "contexts"));
         checkNotNull(method, "method");
 
@@ -304,7 +304,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> addParent(Set<Context> contexts, SubjectReference parent) {
+    public CompletableFuture<Boolean> addParent(Set<Context<?, Subject>> contexts, SubjectReference parent) {
         checkNotNull(contexts, "contexts");
         checkNotNull(parent, "parent");
         contexts = ImmutableSet.copyOf(contexts);
@@ -337,7 +337,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> removeParent(Set<Context> contexts, SubjectReference parent) {
+    public CompletableFuture<Boolean> removeParent(Set<Context<?, Subject>> contexts, SubjectReference parent) {
         checkNotNull(contexts, "contexts");
         checkNotNull(parent, "parent");
         contexts = ImmutableSet.copyOf(contexts);
@@ -368,7 +368,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> clearParents(Set<Context> contexts) {
+    public CompletableFuture<Boolean> clearParents(Set<Context<?, Subject>> contexts) {
         boolean ret = this.parents.remove(checkNotNull(contexts, "contexts")) != null;
         if (ret) {
             onUpdate();
@@ -377,17 +377,17 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public Map<Set<Context>, Map<String, String>> getAllOptions() {
+    public Map<Set<Context<?, Subject>>, Map<String, String>> getAllOptions() {
         return ImmutableMap.copyOf(this.options);
     }
 
     @Override
-    public Map<String, String> getOptions(Set<Context> contexts) {
+    public Map<String, String> getOptions(Set<Context<?, Subject>> contexts) {
         return this.options.getOrDefault(checkNotNull(contexts, "contexts"), ImmutableMap.of());
     }
 
     @Override
-    public CompletableFuture<Boolean> setOption(Set<Context> contexts, String key, @Nullable String value) {
+    public CompletableFuture<Boolean> setOption(Set<Context<?, Subject>> contexts, String key, @Nullable String value) {
         checkNotNull(contexts, "contexts");
         checkNotNull(key, "key");
         @Nullable Map<String, String> origMap = this.options.get(contexts);
@@ -421,7 +421,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> setOptions(Set<Context> contexts, @Nullable Map<String, String> options, TransferMethod method) {
+    public CompletableFuture<Boolean> setOptions(Set<Context<?, Subject>> contexts, @Nullable Map<String, String> options, TransferMethod method) {
         contexts = ImmutableSet.copyOf(checkNotNull(contexts, "contexts"));
         checkNotNull(method, "method");
 
@@ -464,7 +464,7 @@ public class MemorySubjectData implements SubjectData {
     }
 
     @Override
-    public CompletableFuture<Boolean> clearOptions(Set<Context> contexts) {
+    public CompletableFuture<Boolean> clearOptions(Set<Context<?, Subject>> contexts) {
         boolean ret = this.options.remove(checkNotNull(contexts, "contexts")) != null;
         if (ret) {
             onUpdate();
@@ -476,9 +476,9 @@ public class MemorySubjectData implements SubjectData {
     public CompletableFuture<Boolean> copyFrom(SubjectData other, TransferMethod method) {
         checkNotNull(other, "other");
         checkNotNull(method, "method");
-        Map<Set<Context>, Map<String, Boolean>> otherPerms = other.getAllPermissions();
-        Map<Set<Context>, Map<String, String>> otherOptions = other.getAllOptions();
-        Map<Set<Context>, List<? extends SubjectReference>> otherParents = other.getAllParents();
+        Map<Set<Context<?, Subject>>, Map<String, Boolean>> otherPerms = other.getAllPermissions();
+        Map<Set<Context<?, Subject>>, Map<String, String>> otherOptions = other.getAllOptions();
+        Map<Set<Context<?, Subject>>, List<? extends SubjectReference>> otherParents = other.getAllParents();
 
         if (method == TransferMethod.OVERWRITE) {
             this.permissions.clear();

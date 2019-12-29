@@ -179,7 +179,7 @@ public interface PermissionService extends ContextualService<Subject> {
         }
 
         return getCollection(SUBJECTS_ROLE_TEMPLATE).flatMap(coll ->
-                coll.getSubject(container.get().getId() + ":"
+                coll.getSubject(container.get().getMetadata().getId() + ":"
                         + checkNotNull(roleTemplate, "roleTemplate")))
                 .map(Subject::getTransientSubjectData);
     }

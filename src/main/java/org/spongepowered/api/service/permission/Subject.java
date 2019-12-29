@@ -83,7 +83,7 @@ import java.util.Set;
  *
  * @see PermissionService
  */
-public interface Subject extends Contextual {
+public interface Subject extends Contextual<Subject> {
 
     /**
      * Returns the subject collection this subject is a member of.
@@ -150,7 +150,7 @@ public interface Subject extends Contextual {
      * @param permission The permission string
      * @return True if permission is granted
      */
-    default boolean hasPermission(final Set<Context> contexts, final String permission) {
+    default boolean hasPermission(final Set<Context<?, Subject>> contexts, final String permission) {
         return this.getPermissionValue(contexts, permission).asBoolean();
     }
 
@@ -187,7 +187,7 @@ public interface Subject extends Contextual {
      * @param permission The permission to check
      * @return The tristate result of the check
      */
-    Tristate getPermissionValue(Set<Context> contexts, String permission);
+    Tristate getPermissionValue(Set<Context<?, Subject>> contexts, String permission);
 
     /**
      * Check if this subject is a child of the given parent in the subject's
@@ -220,7 +220,7 @@ public interface Subject extends Contextual {
      * @param parent The parent to check for inheritance
      * @return Whether this is a child of the given parent
      */
-    boolean isChildOf(Set<Context> contexts, SubjectReference parent);
+    boolean isChildOf(Set<Context<?, Subject>> contexts, SubjectReference parent);
 
     /**
      * Return all parents that this group has in its current context
@@ -247,7 +247,7 @@ public interface Subject extends Contextual {
      * @param contexts The context combination to check in
      * @return An immutable list of parents
      */
-    List<? extends SubjectReference> getParents(Set<Context> contexts);
+    List<? extends SubjectReference> getParents(Set<Context<?, Subject>> contexts);
 
     /**
      * Gets the value of a given option in the given context.
@@ -264,7 +264,7 @@ public interface Subject extends Contextual {
      * @param key The key to get an option by. Case-insensitive.
      * @return The value of the option, if any is present
      */
-    Optional<String> getOption(Set<Context> contexts, String key);
+    Optional<String> getOption(Set<Context<?, Subject>> contexts, String key);
 
     /**
      * Gets the value of a given option in the subject's current context.

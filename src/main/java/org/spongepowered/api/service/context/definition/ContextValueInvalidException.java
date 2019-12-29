@@ -22,19 +22,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.service.context;
+package org.spongepowered.api.service.context.definition;
+
+import com.google.common.collect.ImmutableSet;
+
+import java.util.Set;
 
 /**
- * A common interface for objects that have a relevant context.
+ * Thrown when a context value is invalid for the given context definition
  */
-public interface ContextSource {
+public class ContextValueInvalidException extends Exception {
+    private static final long serialVersionUID = -400138690909271339L;
+    
+    private final String providedValue;
+    private final Set<String> suggestedValues;
+
+    public ContextValueInvalidException(String providedValue, Set<String> suggestedValues) {
+        this.providedValue = providedValue;
+        this.suggestedValues = ImmutableSet.copyOf(suggestedValues);
+    }
+
+    public ContextValueInvalidException(String providedValue) {
+        this(providedValue, ImmutableSet.of());
+    }
 
     /**
-     * Returns the context most relevant to this object.
-     *
-     * <p>This context may or may not be the same across multiple invocations.</p>
-     *
-     * @return A given context
+     * @return the value provided by the user
      */
-    Context<?, ?> getContext();
+    public String getProvidedValue() {
+        return providedValue;
+    }
+
+    /**
+     * Other potentially relevant values that the user may be interested in
+     *
+     * @return an immutable set of values
+     */
+    public Set<String> getSuggestedValues() {
+        return suggestedValues;
+    }
 }

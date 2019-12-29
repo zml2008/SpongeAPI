@@ -27,7 +27,6 @@ package org.spongepowered.api.service.economy.account;
 import net.kyori.adventure.text.Component;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.User;
-import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.profile.GameProfile;
 import org.spongepowered.api.service.context.Context;
 import org.spongepowered.api.service.context.Contextual;
@@ -55,7 +54,7 @@ import java.util.UUID;
  * accounts may be used for purposes such as bank accounts, non-player
  * {@link Entity} accounts, or other things.</p>
  */
-public interface Account extends Contextual {
+public interface Account extends Contextual<Account> {
 
     /**
      * Gets the display name for this account.
@@ -100,7 +99,7 @@ public interface Account extends Contextual {
      * @return Whether this account has a set balance for the specified
      *     {@link Currency} and {@link Context}s
      */
-    boolean hasBalance(Currency currency, Set<Context> contexts);
+    boolean hasBalance(Currency currency, Set<Context<?, Account>> contexts);
 
     /**
      * Returns whether this account has a set balance for the specified
@@ -134,7 +133,7 @@ public interface Account extends Contextual {
      * @return The value for the specified {@link Currency} with
      *     the specified {@link Context}s.
      */
-    BigDecimal getBalance(Currency currency, Set<Context> contexts);
+    BigDecimal getBalance(Currency currency, Set<Context<?, Account>> contexts);
 
     /**
      * Returns a {@link BigDecimal} representative of the balance stored
@@ -163,14 +162,14 @@ public interface Account extends Contextual {
      *
      * <p>Changes to the returned {@link Map} will not be reflected in
      * the underlying {@link Account}. See
-     * {@link #setBalance(Currency, BigDecimal, Cause, Set)}  to set values.</p>
+     * {@link #setBalance(Currency, BigDecimal, Set)}  to set values.</p>
      *
      * @param contexts the set of {@link Context}s to use with the
      *     specified amounts
      * @return A {@link Map} of {@link Currency} to {@link BigDecimal} amounts
      *     that this account holds
      */
-    Map<Currency, BigDecimal> getBalances(Set<Context> contexts);
+    Map<Currency, BigDecimal> getBalances(Set<Context<?, Account>> contexts);
 
     /**
      * Returns a {@link Map} of all currently set balances the account holds
@@ -185,7 +184,7 @@ public interface Account extends Contextual {
      * <p>Changes to the returned {@link Map} will not be reflected in
      * the underlying {@link Account} and may result in runtime exceptions
      * depending on implementation. See
-     * {@link #setBalance(Currency, BigDecimal, Cause, Set)}  to set values.</p>
+     * {@link #setBalance(Currency, BigDecimal, Set)}  to set values.</p>
      *
      * @return A {@link Map} of {@link Currency} to {@link BigDecimal} amounts
      *     that this account holds
@@ -207,7 +206,7 @@ public interface Account extends Contextual {
      *     specified {@link Currency}
      * @return The result of the transaction
      */
-    TransactionResult setBalance(Currency currency, BigDecimal amount, Set<Context> contexts);
+    TransactionResult setBalance(Currency currency, BigDecimal amount, Set<Context<?, Account>> contexts);
 
     /**
      * Sets the balance for this account to the specified amount for the
@@ -233,7 +232,7 @@ public interface Account extends Contextual {
      * @return A map of {@link Currency} to {@link TransactionResult}. Each
      *     entry represents the result of resetting a particular currency.
      */
-    Map<Currency, TransactionResult> resetBalances(Set<Context> contexts);
+    Map<Currency, TransactionResult> resetBalances(Set<Context<?, Account>> contexts);
 
     /**
      * Resets the balances for all {@link Currency}s used on this account to
@@ -257,7 +256,7 @@ public interface Account extends Contextual {
      *
      * @return The result of the transaction
      */
-    TransactionResult resetBalance(Currency currency, Set<Context> contexts);
+    TransactionResult resetBalance(Currency currency, Set<Context<?, Account>> contexts);
 
     /**
      * Resets the balance for the specified {@link Currency} to its default
@@ -281,7 +280,7 @@ public interface Account extends Contextual {
      *     specified {@link Currency}
      * @return The result of the transaction
      */
-    TransactionResult deposit(Currency currency, BigDecimal amount, Set<Context> contexts);
+    TransactionResult deposit(Currency currency, BigDecimal amount, Set<Context<?, Account>> contexts);
 
     /**
      * Deposits the given amount of the specified {@link Currency} to
@@ -305,7 +304,7 @@ public interface Account extends Contextual {
      *     specified {@link Currency}
      * @return The result of the transaction
      */
-    TransactionResult withdraw(Currency currency, BigDecimal amount, Set<Context> contexts);
+    TransactionResult withdraw(Currency currency, BigDecimal amount, Set<Context<?, Account>> contexts);
 
     /**
      * Withdraws the specified amount of the specified {@link Currency} from
@@ -336,7 +335,7 @@ public interface Account extends Contextual {
      * @return A {@link TransferResult} representative of the effects of
      *     the operation
      */
-    TransferResult transfer(Account to, Currency currency, BigDecimal amount, Set<Context> contexts);
+    TransferResult transfer(Account to, Currency currency, BigDecimal amount, Set<Context<?, Account>> contexts);
 
     /**
      * Transfers the specified amount of the specified {@link Currency}

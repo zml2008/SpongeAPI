@@ -24,11 +24,13 @@
  */
 package org.spongepowered.api.service.context;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Objects.requireNonNull;
 
-import com.google.common.collect.Maps;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.spongepowered.api.service.context.definition.ContextValueInvalidException;
 
-import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Encapsulates a single attribute about the state or circumstances of a
@@ -46,32 +48,43 @@ import java.util.Map;
  * <p>For example, a context encapsulating a {@link Contextual}s circumstance
  * within a given world would have key of "world" and a value equal to the name
  * of the world.</p>
- *
- * <p>{@link Context} is immutable. The {@link #setValue(String)} inherited from
- * {@link java.util.Map.Entry} is not supported.</p>
  */
-public final class Context implements Map.Entry<String, String> {
+public final class Context<T, ContextHolder extends Contextual<ContextHolder>> {
 
-    public static final String USER_KEY = "user";
+    /*public static final String USER_KEY = "user";
     public static final String WORLD_KEY = "world";
     public static final String DIMENSION_KEY = "dimension";
     public static final String REMOTE_IP_KEY = "remoteip";
     public static final String LOCAL_HOST_KEY = "localhost";
     public static final String LOCAL_IP_KEY = "localip";
-    public static final String LOCAL_PORT_KEY = "localport"; // This portkey is an old boot
+    public static final String LOCAL_PORT_KEY = "localport";*/
 
-    private final Map.Entry<String, String> wrapped;
+    private final String key;
+    private final String rawValue;
+
+    @Nullable
+    private ContextDefinition<T, ContextHolder> definition;
+    @Nullable
+    private T parsedValue;
 
     /**
-     * Create a new context instance.
+     * Create a new unresolved context instance
      *
      * @param key Context key. Must not be null.
-     * @param value Context value. Must not be null.
+     * @param rawValue Context value. Must not be null.
      */
-    public Context(String key, String value) {
-        checkNotNull(key, "key");
-        checkNotNull(value, "value");
-        this.wrapped = Maps.immutableEntry(key, value);
+    public Context(String key, String rawValue) {
+        requireNonNull(key, "key");
+        requireNonNull(rawValue, "value");
+        this.key = key;
+        this.rawValue = rawValue;
+    }
+
+    Context(ContextDefinition<T, ContextHolder> type, T value) {
+        this.key = type.getName();
+        this.rawValue = type.serialize(value);
+        this.definition = type;
+        this.parsedValue = value;
     }
 
     /**
@@ -79,9 +92,8 @@ public final class Context implements Map.Entry<String, String> {
      *
      * @return The key
      */
-    @Override
     public String getKey() {
-        return this.wrapped.getKey();
+        return this.key;
     }
 
     /**
@@ -89,21 +101,53 @@ public final class Context implements Map.Entry<String, String> {
      *
      * @return The value
      */
-    @Override
-    public String getValue() {
-        return this.wrapped.getValue();
+    public String getRawValue() {
+        return this.rawValue;
     }
 
-    /**
-     * @deprecated Context does not support changing the values
-     * @param value The value
-     * @return Nothing
-     * @throws UnsupportedOperationException Contexts are immutable
-     */
-    @Deprecated
-    @Override
-    public String setValue(String value) {
-        throw new UnsupportedOperationException("Contexts are immutable");
+    public boolean tryResolve(ContextualService<ContextHolder> service) {
+        if (this.definition != null) {
+            return this.parsedValue != null;
+        }
+
+        Optional<ContextDefinition<T, ContextHolder>> def = service.getContextDefinition(this.key);
+        if (def.isPresent()) {
+            this.definition = def.get();
+            try {
+                this.parsedValue = requireNonNull(def.get().deserialize(this.rawValue));
+                return true;
+            } catch (ContextValueInvalidException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public T getParsedValue(ContextDefinition<T, ContextHolder> definition) throws ContextValueInvalidException {
+        if (this.definition != null && this.definition != definition) {
+            throw new IllegalStateException("The provided context definition does not matcch the one this context object currently knows about");
+        }
+
+        this.definition = definition;
+        @Nullable
+        T parsedValue = this.parsedValue;
+        if (parsedValue == null) {
+            this.parsedValue = (parsedValue = definition.deserialize(this.rawValue));
+        }
+        return parsedValue;
+    }
+
+    public T getParsedValue(ContextualService<ContextHolder> service) throws ContextValueInvalidException {
+        @Nullable
+        T tempParsed = this.parsedValue;
+
+        if (tempParsed != null) {
+            return tempParsed;
+        }
+
+        ContextDefinition<T, ContextHolder> def = service.<T>getContextDefinition(this.key)
+                .orElseThrow(() -> new IllegalStateException("No definition found for context " + this.key));
+        return parsedValue = def.deserialize(this.rawValue);
     }
 
     @Override
@@ -111,16 +155,25 @@ public final class Context implements Map.Entry<String, String> {
         if (this == o) {
             return true;
         }
-        return o instanceof Map.Entry<?, ?> && this.wrapped.equals(o);
+        if (!(o instanceof Context<?, ?>)) {
+            return false;
+        }
+        Context<?, ?> otherCtx = ((Context) o);
+
+        return Objects.equals(key, otherCtx.key) &&
+                (Objects.equals(rawValue, otherCtx.rawValue)
+                || Objects.equals(parsedValue, otherCtx.parsedValue));
     }
 
     @Override
     public int hashCode() {
-        return this.wrapped.hashCode();
+        int result = key.hashCode();
+        result = 31 * result + rawValue.hashCode();
+        return result;
     }
 
     @Override
     public String toString() {
-        return getKey() + "=" + getValue();
+        return getKey() + "=" + parsedValue + " (raw: " + rawValue + ")";
     }
 }

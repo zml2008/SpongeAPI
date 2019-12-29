@@ -33,7 +33,7 @@ import java.util.Set;
  *
  * <p>Used primarily by {@link ContextualService}s.</p>
  */
-public interface Contextual {
+public interface Contextual<ThisType extends Contextual<ThisType>> {
 
     /**
      * Returns the identifier associated with this Contextual.
@@ -68,7 +68,7 @@ public interface Contextual {
 
     /**
      * Calculates the objects active contexts at the given moment, using the
-     * {@link ContextCalculator}s held by the {@link ContextualService}.
+     * {@link }s held by the {@link ContextualService}.
      *
      * <p>"Active" contexts refers to the contexts currently applicable to the
      * contextual.</p>
@@ -77,5 +77,5 @@ public interface Contextual {
      *
      * @return An immutable set of active contexts
      */
-    Set<Context> getActiveContexts();
+    Set<Context<?, ThisType>> getActiveContexts();
 }
